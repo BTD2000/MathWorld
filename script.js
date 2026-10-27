@@ -43,7 +43,7 @@ if (typeof renderMathInElement === "function") {
       { left: "$$", right: "$$", display: true },
       { left: "\\[", right: "\\]", display: true },
       { left: "$", right: "$", display: false },
-      { left: "\\(", right: "\\)", display: false }
+      { left: "\\(", right: "\\)", display: false}
     ]
   });
 }
