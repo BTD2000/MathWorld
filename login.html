@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in - MathWorld</title>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="auth.js"></script>
+</head>
+<body data-mode="login">
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main>
+      <h1>Log in</h1>
+      <p>Welcome back to MathWorld.</p>
+      <div class="auth-card">
+        <form id="authForm">
+          <label>Email
+            <input type="email" id="email" autocomplete="email" required>
+          </label>
+          <label>Password
+            <input type="password" id="password" autocomplete="current-password" required>
+          </label>
+          <p>
+            <button type="button" id="forgotPasswordButton" class="btn btn-small">Forgot password?</button>
+          </p>
+          <button type="submit" class="btn btn-primary">Log in</button>
+        </form>
+        <p id="message" class="auth-message" role="status"></p>
+        <p class="auth-switch">No account yet? <a href="signup.html">Sign up</a></p>
+      </div>
+    </main>
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>

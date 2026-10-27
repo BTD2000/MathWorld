@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>About MathWorld</h1>
+      <p>MathWorld is a place for everyone who loves mathematics, from curious beginners to seasoned problem solvers.</p>
+
+      <h2>What you will find here</h2>
+      <ul>
+        <li>Problems of different difficulty levels</li>
+        <li>Contests to challenge yourself and others</li>
+        <li>Beautifully typeset formulas and explanations</li>
+      </ul>
+
+      <h2>Why it exists</h2>
+      <p>Mathematics is more fun when it is shared. This site is built by hand, one page at a time, and it keeps growing.</p>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>

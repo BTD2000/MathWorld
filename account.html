@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account - MathWorld</title>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="bbcode.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="solution-cards.js"></script>
+  <script defer src="account.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    <main>
+      <h1>Account</h1>
+      <p id="statusLine"></p>
+      <div id="accountContent" hidden>
+        <section class="account-section">
+          <h2>Profile</h2>
+          <div class="card">
+            <p class="account-email">Current email: <strong id="emailText"></strong></p>
+            <form id="usernameForm">
+              <label>Username
+                <input type="text" id="usernameInput" autocomplete="username"
+                       pattern="[A-Za-z0-9_]{3,30}" required>
+                <span class="auth-hint">3 to 30 characters: letters, numbers, underscore. This name is public.</span>
+              </label>
+              <button type="submit" class="btn btn-primary btn-small">Save username</button>
+              <p id="usernameMessage" class="auth-message" role="status"></p>
+            </form>
+          </div>
+        </section>
+
+        <section class="account-section">
+          <h2>Change email</h2>
+          <div class="card">
+            <form id="emailForm">
+              <label>New email
+                <input type="email" id="newEmailInput" autocomplete="email" required>
+              </label>
+              <label>Current password
+                <input type="password" id="emailCurrentPassword" autocomplete="current-password" required>
+              </label>
+              <button type="submit" class="btn btn-primary btn-small">Change email</button>
+              <p id="emailMessage" class="auth-message" role="status"></p>
+              <p class="auth-hint">You may need to confirm the change through an email sent by Supabase.</p>
+            </form>
+          </div>
+        </section>
+
+        <section class="account-section">
+          <h2>Change password</h2>
+          <div class="card">
+            <form id="passwordForm">
+              <label>Current password
+                <input type="password" id="passwordCurrentPassword" autocomplete="current-password" required>
+              </label>
+              <button type="submit" class="btn btn-primary btn-small">Verify and send confirmation email</button>
+              <p id="passwordMessage" class="auth-message" role="status"></p>
+              <p class="auth-hint">After your current password is verified, we will email you a secure link. Open that link to set your new password.</p>
+            </form>
+          </div>
+        </section>
+
+        <section class="account-section">
+          <h2>My solutions</h2>
+          <p id="solutionsStatus"></p>
+          <div id="solutionList"></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>

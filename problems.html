@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Problems - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="problems.js"></script>
+</head>
+<body>
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Problems</h1>
+      <p>Pick a problem and save your own solution.</p>
+
+      <div class="filters">
+        <label class="filter-field">
+          Search
+          <input type="search" id="searchInput" placeholder="Search by title">
+        </label>
+
+        <label class="filter-field">
+          Topic
+          <select id="topicSelect">
+            <option value="">All topics</option>
+          </select>
+        </label>
+
+        <div class="filter-field">
+          Difficulty
+          <div class="range-inputs">
+            <input type="number" id="minDiff" min="1" max="14" placeholder="1" aria-label="Minimum difficulty">
+            <span>to</span>
+            <input type="number" id="maxDiff" min="1" max="14" placeholder="14" aria-label="Maximum difficulty">
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-small" id="clearFilters">Clear filters</button>
+      </div>
+
+      <div class="tag-filter" id="tagFilter" hidden></div>
+
+      <p class="result-count" id="resultCount"></p>
+      <p id="statusLine"></p>
+
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th><button type="button" class="sort-btn" data-sort="id">#<span class="sort-arrow"></span></button></th>
+              <th><button type="button" class="sort-btn" data-sort="title">Title<span class="sort-arrow"></span></button></th>
+              <th><button type="button" class="sort-btn" data-sort="topic">Topic<span class="sort-arrow"></span></button></th>
+              <th>Tags</th>
+              <th><button type="button" class="sort-btn" data-sort="difficulty">Difficulty<span class="sort-arrow"></span></button></th>
+            </tr>
+          </thead>
+          <tbody id="problemRows"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>

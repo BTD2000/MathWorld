@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="auth.js"></script>
+</head>
+<body data-mode="signup">
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Sign up</h1>
+      <p>Create an account to save your own solutions.</p>
+
+      <div class="auth-card">
+        <form id="authForm">
+          <label>Username
+            <input type="text" id="username" autocomplete="username"
+                   pattern="[A-Za-z0-9_]{3,30}" required>
+            <span class="auth-hint">3 to 30 characters: letters, numbers, underscore. This name is public.</span>
+          </label>
+          <label>Email
+            <input type="email" id="email" autocomplete="email" required>
+          </label>
+          <label>Password
+            <input type="password" id="password" autocomplete="new-password" minlength="8" required>
+            <span class="auth-hint">At least 8 characters.</span>
+          </label>
+          <label>Confirm password
+            <input type="password" id="confirmPassword" autocomplete="new-password" minlength="8" required>
+          </label>
+          <button type="submit" class="btn btn-primary">Create account</button>
+        </form>
+
+        <p id="message" class="auth-message" role="status"></p>
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Problem - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="bbcode.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="problem.js"></script>
+</head>
+<body>
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main class="wide">
+      <p><a href="problems.html">&larr; All problems</a></p>
+      <p id="statusLine"></p>
+
+      <div class="problem-layout">
+
+        <div class="problem-main">
+          <div id="problemBox"></div>
+
+          <h2>My solutions</h2>
+          <p id="loginPrompt" hidden>
+            <a href="login.html">Log in</a> to save your own solution.
+          </p>
+
+          <form id="solutionForm" hidden>
+            <label>Your solution (use $...$ for math, for example $x^2$)
+              <textarea id="solutionText" rows="8" maxlength="20000" required></textarea>
+            </label>
+            <div class="solution-preview" id="solutionPreview" hidden></div>
+            <label class="inline">
+              <input type="checkbox" id="isPublic">
+              Make this solution public
+            </label>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <p id="formMessage"></p>
+          </form>
+
+          <div id="myList"></div>
+
+          <h2>Solutions shared by others</h2>
+          <div id="publicList"></div>
+        </div>
+
+        <aside class="info-panel" id="infoPanel" hidden>
+          <h2>Details</h2>
+          <table class="info-table">
+            <tbody id="infoRows"></tbody>
+          </table>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>

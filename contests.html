@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contests - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Contests</h1>
+      <p>Timed problem sets where you can test yourself against others.</p>
+
+      <p class="note">Contests are coming soon. Once accounts are ready, you will be able to log in, enter, and see your results here.</p>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Weekly Challenge</h3>
+          <span class="badge">Coming soon</span>
+        </div>
+        <p>A short set of problems released every week.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Monthly Olympiad</h3>
+          <span class="badge">Coming soon</span>
+        </div>
+        <p>A longer proof-based contest with a final ranking.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>
