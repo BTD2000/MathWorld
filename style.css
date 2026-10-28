@@ -705,6 +705,10 @@ textarea:focus {
   overflow-wrap: anywhere;
 }
 
+.see-also-list a::after {
+  content: none !important;
+}
+
 
 
 
