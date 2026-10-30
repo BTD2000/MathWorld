@@ -6,10 +6,10 @@ const NAV_HTML = `
     <li><a href="problems.html">Problems</a></li>
     <li><a href="solutions.html">Solutions</a></li>
     <li><a href="contests.html">Contests</a></li>
+    <li><a href="theme.html">Themes</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
   <div class="sidebar-actions">
-    <button type="button" class="btn" id="themeToggle">Dark mode</button>
     <a href="account.html" class="btn btn-primary" id="accountLink" hidden>Account</a>
     <button type="button" class="btn" id="logoutButton" hidden>Log out</button>
     <a href="login.html" class="btn" id="loginLink">Login</a>

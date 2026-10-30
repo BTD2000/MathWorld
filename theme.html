@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Themes | MathWorld</title>
+  <link rel="stylesheet" href="style.css">
+
+  <script>
+    const savedTheme = localStorage.getItem("theme");
+    const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
+    document.documentElement.dataset.theme = savedTheme || preferredTheme;
+  </script>
+</head>
+
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content">
+      <h1>Themes</h1>
+      <p>Choose a color theme for your MathWorld experience.</p>
+
+      <section class="theme-grid">
+
+        <article class="theme-card">
+          <div class="theme-preview preview-light">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2>Light</h2>
+          <button class="btn btn-primary" data-theme-choice="light">
+            Apply
+          </button>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-preview preview-dark">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2>Dark</h2>
+          <button class="btn btn-primary" data-theme-choice="dark">
+            Apply
+          </button>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-preview preview-lavender">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2>Lavender</h2>
+          <button class="btn btn-primary" data-theme-choice="lavender">
+            Apply
+          </button>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-preview preview-sunset">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2>Sunset</h2>
+          <button class="btn btn-primary" data-theme-choice="sunset">
+            Apply
+          </button>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-preview preview-forest">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2>Forest</h2>
+          <button class="btn btn-primary" data-theme-choice="forest">
+            Apply
+          </button>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-preview preview-rose">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <h2>Rose</h2>
+          <button class="btn btn-primary" data-theme-choice="rose">
+            Apply
+          </button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-dracula">
+            <div></div><div></div><div></div>
+        </div>
+        <h2>Dracula</h2>
+        <button class="btn btn-primary" data-theme-choice="dracula">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-nord">
+            <div></div><div></div><div></div>
+        </div>
+        <h2>Nord</h2>
+        <button class="btn btn-primary" data-theme-choice="nord">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-hacker">
+            <div></div><div></div><div></div>
+        </div>
+        <h2>Hacker</h2>
+        <button class="btn btn-primary" data-theme-choice="hacker">
+            Apply
+        </button>
+        </article>
+
+        <article class="theme-card">
+            <div class="theme-preview preview-oled">
+            <div></div><div></div><div></div>
+            </div>
+            <h2>OLED Black</h2>
+            <button class="btn btn-primary" data-theme-choice="oled">Apply</button>
+        </article>
+
+        <article class="theme-card">
+            <div class="theme-preview preview-ocean">
+            <div></div><div></div><div></div>
+            </div>
+            <h2>Deep Ocean</h2>
+            <button class="btn btn-primary" data-theme-choice="ocean">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-rosepine"><div></div><div></div><div></div></div>
+        <h2>Rose Pine</h2>
+        <button class="btn btn-primary" data-theme-choice="rosepine">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-monokai"><div></div><div></div><div></div></div>
+        <h2>Monokai</h2>
+        <button class="btn btn-primary" data-theme-choice="monokai">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-gruvbox"><div></div><div></div><div></div></div>
+        <h2>Gruvbox</h2>
+        <button class="btn btn-primary" data-theme-choice="gruvbox">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-cyberpunk"><div></div><div></div><div></div></div>
+        <h2>Cyberpunk</h2>
+        <button class="btn btn-primary" data-theme-choice="cyberpunk">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-royal"><div></div><div></div><div></div></div>
+        <h2>Royal Blue</h2>
+        <button class="btn btn-primary" data-theme-choice="royal">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-coffee"><div></div><div></div><div></div></div>
+        <h2>Coffee</h2>
+        <button class="btn btn-primary" data-theme-choice="coffee">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-arctic"><div></div><div></div><div></div></div>
+        <h2>Arctic</h2>
+        <button class="btn btn-primary" data-theme-choice="arctic">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-paper"><div></div><div></div><div></div></div>
+        <h2>Paper</h2>
+        <button class="btn btn-primary" data-theme-choice="paper">Apply</button>
+        </article>
+
+        
+        <article class="theme-card">
+        <div class="theme-preview preview-emerald">
+            <div></div><div></div><div></div>
+        </div>
+        <h2>Emerald</h2>
+        <button class="btn btn-primary" data-theme-choice="emerald">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-burgundy">
+            <div></div><div></div><div></div>
+        </div>
+        <h2>Burgundy</h2>
+        <button class="btn btn-primary" data-theme-choice="burgundy">Apply</button>
+        </article>
+
+        <article class="theme-card">
+        <div class="theme-preview preview-amber">
+            <div></div><div></div><div></div>
+        </div>
+        <h2>Amber</h2>
+        <button class="btn btn-primary" data-theme-choice="amber">Apply</button>
+        </article>
+
+
+
+      </section>
+    </main>
+
+    <footer id="siteFooter"></footer>
+  </div>
+
+  <script src="layout.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

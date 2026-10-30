@@ -1,22 +1,10 @@
-// ===== 1. Dark / light mode toggle =====
-const themeToggle = document.getElementById("themeToggle");
+// ===== 1. Theme toggle =====
 
-function updateToggleLabel() {
-  if (!themeToggle) return;
-  const isDark = document.documentElement.dataset.theme === "dark";
-  themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("theme", theme);
+  updateToggleLabel();
 }
-
-if (themeToggle) {
-  themeToggle.addEventListener("click", function () {
-    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("theme", next);
-    updateToggleLabel();
-  });
-}
-
-updateToggleLabel();
 
 
 // ===== 2. Highlight the link for the current page =====
@@ -59,3 +47,16 @@ function difficultyLabel(value) {
   }
   return String(value);
 }
+
+
+// ===== 5. Theme selection =====
+
+const themeButtons = document.querySelectorAll("[data-theme-choice]");
+
+themeButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    const selectedTheme = button.dataset.themeChoice;
+
+    applyTheme(selectedTheme);
+  });
+});
