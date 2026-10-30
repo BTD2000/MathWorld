@@ -5,7 +5,7 @@ function renderBBCode(element, text) {
   const stack = [{ node: root, tag: "root" }];
 
   const tokenPattern =
-    /\[(\/?)(b|i|u|s|list|url)(?:=([^\]]*))?\]|\[\*\]/gi;
+    /\[(\/?)(b|i|u|s|list|url|ruler)(?:=([^\]]*))?\]|\[\*\]/gi;
 
   function current() {
     return stack[stack.length - 1].node;
@@ -60,6 +60,12 @@ function renderBBCode(element, text) {
 
     if (closing) {
       if (!closeTag(tag)) addText(token);
+      continue;
+    }
+
+    if (tag === "ruler") {
+      const hr = document.createElement("hr");
+      current().append(hr);
       continue;
     }
 

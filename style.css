@@ -769,6 +769,13 @@ textarea:focus {
   overflow-wrap: anywhere;
 }
 
+/* BBCode ruler */
+.main-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
 
 
 /* ===== Theme Gallery ===== */
