@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BBCode Guide - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme =
+        saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>BBCode Guide</h1>
+
+      <p>
+        BBCode is a lightweight markup language used to format
+        text and organize mathematical solutions on MathWorld.
+        It uses simple tags enclosed in square brackets.
+      </p>
+
+      <h2>Getting Started</h2>
+      <p>
+        To format text, place an opening tag before the content
+        and a closing tag after it.
+      </p>
+
+      <pre><code>[b]This text is bold.[/b]</code></pre>
+
+        <h2>Text Formatting</h2>
+
+            <p>
+            BBCode provides several tags that allow you to change
+            the appearance of your text.
+            </p>
+
+            <div class="guide-example">
+            <div class="guide-description">
+                <h3>Bold</h3>
+                <p>Use <code>[b]</code> to make text bold.</p>
+            </div>
+
+            <pre><code>[b]This text is bold.[/b]</code></pre>
+            <div class="guide-result">
+                <strong>This text is bold.</strong>
+            </div>
+            </div>
+
+            <div class="guide-example">
+            <div class="guide-description">
+                <h3>Italic</h3>
+                <p>Use <code>[i]</code> to make text italic.</p>
+            </div>
+
+            <pre><code>[i]This text is italic.[/i]</code></pre>
+            <div class="guide-result">
+                <em>This text is italic.</em>
+            </div>
+            </div>
+
+            <div class="guide-example">
+            <div class="guide-description">
+                <h3>Underline</h3>
+                <p>Use <code>[u]</code> to underline text.</p>
+            </div>
+
+            <pre><code>[u]This text is underlined.[/u]</code></pre>
+            <div class="guide-result">
+                <u>This text is underlined.</u>
+            </div>
+            </div>
+
+            <div class="guide-example">
+            <div class="guide-description">
+                <h3>Strikethrough</h3>
+                <p>Use <code>[s]</code> to draw a line through text.</p>
+            </div>
+
+            <pre><code>[s]This text is crossed out.[/s]</code></pre>
+            <div class="guide-result">
+                <s>This text is crossed out.</s>
+            </div>
+            </div>
+
+        <h2>Lists</h2>
+
+        <p>
+        BBCode allows you to create both unordered and ordered lists.
+        Use <code>[*]</code> to start each list item.
+        </p>
+
+        <div class="guide-example">
+        <h3>Unordered List</h3>
+        <p>Use <code>[list]</code> to create a bulleted list.</p>
+
+<pre><code>
+[list]
+    [*]Algebra
+    [*]Geometry
+    [*]Combinatorics
+    [*]Number Theory
+[/list]
+</code></pre>
+
+        <div class="guide-result">
+            <ul>
+            <li>Algebra</li>
+            <li>Geometry</li>
+            <li>Combinatorics</li>
+            <li>Number Theory</li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="guide-example">
+        <h3>Numbered List</h3>
+        <p>Use <code>[list=1]</code> to create a numbered list.</p>
+
+<pre><code>
+[list=1]
+    [*]First step
+    [*]Second step
+    [*]Third step
+[/list]
+</code></pre>
+
+        <div class="guide-result">
+            <ol>
+            <li>First step</li>
+            <li>Second step</li>
+            <li>Third step</li>
+            </ol>
+        </div>
+        </div>
+
+        <div class="guide-example">
+        <h3>Lettered Lists</h3>
+        <p>
+            You can use lowercase or uppercase letters as list markers.
+        </p>
+
+<pre><code>
+[list=a]
+    [*]First item
+    [*]Second item
+[/list]
+
+[list=a-upper]
+    [*]First item
+    [*]Second item
+[/list]
+</code></pre>
+
+        <div class="guide-result">
+            <p>Lowercase letters:</p>
+            <ol type="a">
+            <li>First item</li>
+            <li>Second item</li>
+            </ol>
+
+            <p>Uppercase letters:</p>
+            <ol type="A">
+            <li>First item</li>
+            <li>Second item</li>
+            </ol>
+        </div>
+        </div>
+
+        <div class="guide-example">
+        <h3>Roman Numeral Lists</h3>
+        <p>
+            Use <code>[list=i]</code> or <code>[list=i-upper]</code>
+            to create lists with Roman numerals.
+        </p>
+
+<pre><code>
+[list=i]
+    [*]First item
+    [*]Second item
+[/list]
+
+[list=i-upper]
+    [*]First item
+    [*]Second item
+[/list]
+</code></pre>
+
+        <div class="guide-result">
+            <p>Lowercase Roman numerals:</p>
+            <ol type="i">
+            <li>First item</li>
+            <li>Second item</li>
+            </ol>
+
+            <p>Uppercase Roman numerals:</p>
+            <ol type="I">
+            <li>First item</li>
+            <li>Second item</li>
+            </ol>
+        </div>
+        </div>
+
+      <h2>Links</h2>
+
+        <p>
+        You can add hyperlinks to your posts using the
+        <code>[url]</code> tag. There are two ways to create a link.
+        </p>
+
+        <div class="guide-example">
+        <h3>Basic URL</h3>
+        <p>
+            Place the URL between the opening and closing tags.
+            The URL itself will be displayed as the link text.
+        </p>
+
+        <pre><code>[url]https://example.com[/url]</code></pre>
+
+        <div class="guide-result">
+            <a href="https://example.com" target="_blank"
+            rel="noopener noreferrer">https://example.com</a>
+        </div>
+        </div>
+
+        <div class="guide-example">
+        <h3>Custom Link Text</h3>
+        <p>
+            You can also specify the text displayed for the link
+            by placing the URL inside the opening tag.
+        </p>
+
+        <pre><code>[url=https://example.com]Visit Example[/url]</code></pre>
+
+        <div class="guide-result">
+            <a href="https://example.com" target="_blank"
+            rel="noopener noreferrer">Visit Example</a>
+        </div>
+        </div>
+
+      <h2>Horizontal Lines</h2>
+
+        <p>
+        Use the <code>[ruler]</code> tag to insert a horizontal
+        line and visually separate different parts of your writing.
+        </p>
+
+        <div class="guide-example">
+        <h3>Horizontal Separator</h3>
+
+<pre><code>
+First part of the solution.
+
+[ruler]
+
+Second part of the solution.
+</code></pre>
+
+        <div class="guide-result">
+            <p>First part of the solution.</p>
+            <hr>
+            <p>Second part of the solution.</p>
+        </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>

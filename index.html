@@ -22,6 +22,8 @@
   <script defer src="layout.js"></script>
   <script defer src="auth-ui.js"></script>
   <script defer src="script.js"></script>
+  <script defer src="news.js"></script>
+  <script defer src="statistics.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -29,22 +31,44 @@
     <nav class="sidebar" id="sidebar"></nav>
 
     <main>
-      <h1>Welcome to the MathWorld</h1>
-      <p>This site is for everyone who loves Mathematics.</p>
+      <h1>Welcome to MathWorld</h1>
 
-      <h2>News</h2>
-      <p>Nothing is here</p>
+      <section class="home-section" id="latestNews">
+        <div class="section-heading">
+          <h2>Latest News</h2>
+          <p>Stay updated with the latest news and announcements.</p>
+        </div>
 
-      <h2>Some of my favourite formulas</h2>
+        <p id="newsStatus">Loading news...</p>
+        <div id="newsList" class="news-list"></div>
+      </section>
 
-      <p>Basel problem</p>
-      <p>$$\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{1}{1^2}+\frac{1}{2^2}+\frac{1}{3^2}+\cdots=\frac{\pi^2}{6}$$</p>
+      <section class="home-section" id="statistics">
+        <div class="section-heading">
+          <h2>MathWorld Statistics</h2>
+          <p>A look at our growing mathematical community.</p>
+        </div>
 
-      <p>Euler product formula</p>
-      <p>$$\zeta(s)=\sum_{n=1}^{\infty}\frac{1}{n^s}=\prod_{p\in\mathbb{P}}\frac{1}{1-p^{-s}}$$</p>
+        <p id="statsStatus">Loading statistics...</p>
 
-      <p>Euler's identity</p>
-      <p>$$e^{i\pi}+1=0$$</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3 id="problemCount">—</h3>
+            <p>Problems</p>
+          </div>
+
+          <div class="stat-card">
+            <h3 id="solutionCount">—</h3>
+            <p>Solutions</p>
+          </div>
+
+          <div class="stat-card">
+            <h3 id="memberCount">—</h3>
+            <p>Members</p>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer" id="siteFooter"></footer>

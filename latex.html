@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LaTeX Guide - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme =
+        saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- KaTeX -->
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+
+  <script defer src="latex-guide.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>LaTeX Guide</h1>
+
+      <p>
+        LaTeX is a typesetting system widely used to write
+        mathematical expressions, equations, and scientific documents.
+        MathWorld uses LaTeX to display mathematical notation clearly.
+      </p>
+
+      <h2>Getting Started</h2>
+
+      <p>
+        You can write mathematical expressions using dollar signs
+        or square brackets.
+      </p>
+
+        <h2>Inline Mathematics</h2>
+
+        <p>
+        Use <code>$...$</code> or <code>\(...\)</code> to write
+        mathematical expressions within a line of text.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+
+        <pre><code>The quadratic formula is $x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$.</code></pre>
+
+        <div class="guide-result">
+            <p>
+            The quadratic formula is
+            \(x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}\).
+            </p>
+        </div>
+        </div>
+
+        <h2>Display Mathematics</h2>
+
+        <p>
+        Use <code>$$...$$</code> or <code>\[...\]</code> to display
+        mathematical expressions on a separate line.
+        This is especially useful for long equations and derivations.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+
+<pre><code>
+\[
+    \sum_{k=1}^{n}k=\frac{n(n+1)}{2}
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            \sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+            \]
+        </div>
+        </div>
+
+      <h2>Fractions</h2>
+        <p>Use <code>\frac{a}{b}</code> to write a fraction.</p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+<pre><code>
+\[
+    \frac{a+b}{c+d}
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            \frac{a+b}{c+d}
+            \]
+        </div>
+        </div>
+
+      <h2>Powers and Subscripts</h2>
+        <p>
+        Use <code>^</code> to write powers and <code>_</code>
+        to write subscripts.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+<pre><code>
+\[
+    x^2+x_1+a_{n+1}+x^{n+1}
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            x^2 + x_1 + a_{n+1} + x^{n+1}
+            \]
+        </div>
+        </div>
+
+      <h2>Square Roots</h2>
+        <p>
+        Use <code>\sqrt{...}</code> to write square roots.
+        You can also specify the root degree using
+        <code>\sqrt[n]{...}</code>.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+<pre><code>
+\[
+    \sqrt{x}+\sqrt[3]{x}+\sqrt{a^2+b^2}
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            \sqrt{x} + \sqrt[3]{x} + \sqrt{a^2+b^2}
+            \]
+        </div>
+        </div>
+
+      <h2>Greek Letters</h2>
+        <p>
+        Use a backslash followed by the name of a Greek letter
+        to write it. Capitalize the first letter for uppercase versions.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+<pre><code>
+\[
+    \alpha,\ \beta,\ \gamma,\ \delta,\ \theta,\ \lambda,\ \mu,\ \pi,\ \sigma,\ \omega
+\]
+
+\[
+    \Gamma,\ \Delta,\ \Theta,\ \Lambda,\ \Pi,\ \Sigma,\ \Omega
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            \alpha,\ \beta,\ \gamma,\ \delta,\ \theta,\ \lambda,\ \mu,\ \pi,\ \sigma,\ \omega
+            \]
+
+            \[
+            \Gamma,\ \Delta,\ \Theta,\ \Lambda,\ \Pi,\ \Sigma,\ \Omega
+            \]
+        </div>
+        </div>
+
+      <h2>Summation and Products</h2>
+        <p>
+        Use <code>\sum</code> for summations and
+        <code>\prod</code> for products. Use <code>_</code>
+        and <code>^</code> to specify the lower and upper limits.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+<pre><code>
+\[
+    \sum_{k=1}^{n}k=\frac{n(n+1)}{2}
+\]
+
+\[
+    \prod_{k=1}^{n}k=n!
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            \sum_{k=1}^{n} k = \frac{n(n+1)}{2}
+            \]
+
+            \[
+            \prod_{k=1}^{n} k = n!
+            \]
+        </div>
+        </div>
+
+      <h2>Sets and Relations</h2>
+        <p>
+        LaTeX provides commands for common set symbols,
+        logical relations, and mathematical comparisons.
+        </p>
+
+        <div class="guide-example">
+        <h3>Example</h3>
+<pre><code>
+\[
+    A\subseteq B,\quad x\in A,\quad y\notin B
+\]
+
+\[
+    A\cup B,\quad A\cap B,\quad A\setminus B
+\]
+
+\[
+    a\leq b,\quad x\neq y,\quad a\equiv b\pmod n
+\]
+</code></pre>
+
+        <div class="guide-result">
+            \[
+            A \subseteq B,\quad x \in A,\quad y \notin B
+            \]
+
+            \[
+            A \cup B,\quad A \cap B,\quad A \setminus B
+            \]
+
+            \[
+            a \leq b,\quad x \neq y,\quad a \equiv b \pmod n
+            \]
+        </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>
