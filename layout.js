@@ -4,7 +4,6 @@ const NAV_HTML = `
   <ul>
     <li><a href="index.html">Home</a></li>
     <li><a href="problems.html">Problems</a></li>
-    <li><a href="solutions.html">Solutions</a></li>
     <li><a href="contests.html">Contests</a></li>
     <li><a href="theme.html">Themes</a></li>
     <li><a href="about.html">About</a></li>

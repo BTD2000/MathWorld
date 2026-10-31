@@ -67,7 +67,7 @@ function makeSolutionCard(row, options = {}) {
   if (options.username) {
     const authorLink = document.createElement("a");
 
-    authorLink.href =
+    authorLink.href = options.profileUrl ||
       "profile.html?username=" + encodeURIComponent(options.username);
 
     authorLink.textContent = options.authorName || options.username;
