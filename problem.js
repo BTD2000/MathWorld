@@ -284,6 +284,7 @@ function openEditor(card, row) {
 }
 
 // ---------- Build one solution card ----------
+
 function makeSolution(row, isMine) {
   const card = document.createElement("div");
   card.className = "card";
@@ -292,8 +293,19 @@ function makeSolution(row, isMine) {
   header.className = "card-header";
 
   const author = document.createElement("strong");
-  const name = row.profiles && row.profiles.username ? row.profiles.username : "Anonymous";
-  author.textContent = isMine ? "You" : name;
+  const username = row.profiles?.username || null;
+
+  if (isMine) {
+    author.textContent = "You";
+  } else if (username) {
+    const authorLink = document.createElement("a");
+    authorLink.href =
+      "profile.html?username=" + encodeURIComponent(username);
+    authorLink.textContent = username;
+    author.append(authorLink);
+  } else {
+    author.textContent = "Anonymous";
+  }
 
   const badge = document.createElement("span");
   badge.className = "badge";
@@ -332,6 +344,7 @@ function makeSolution(row, isMine) {
         .from("solutions")
         .update({ is_public: !row.is_public })
         .eq("id", row.id);
+
       if (error) {
         alert(error.message);
         return;
@@ -345,7 +358,12 @@ function makeSolution(row, isMine) {
     remove.textContent = "Delete";
     remove.addEventListener("click", async function () {
       if (!confirm("Delete this solution?")) return;
-      const { error } = await db.from("solutions").delete().eq("id", row.id);
+
+      const { error } = await db
+        .from("solutions")
+        .delete()
+        .eq("id", row.id);
+
       if (error) {
         alert(error.message);
         return;
@@ -359,6 +377,7 @@ function makeSolution(row, isMine) {
 
   return card;
 }
+
 
 // ---------- Load the solutions ----------
 async function loadSolutions() {
