@@ -1,6 +1,11 @@
 const statusLine = document.getElementById("statusLine");
 const accountContent = document.getElementById("accountContent");
-const emailText = document.getElementById("emailText");
+const profileEmail = document.getElementById("profileEmail");
+const profileUsername = document.getElementById("profileUsername");
+const profileInitial = document.getElementById("profileInitial");
+
+const solutionCount = document.getElementById("solutionCount");
+const publicSolutionCount = document.getElementById("publicSolutionCount");
 const usernameForm = document.getElementById("usernameForm");
 const usernameInput = document.getElementById("usernameInput");
 const usernameMessage = document.getElementById("usernameMessage");
@@ -32,6 +37,24 @@ function showFormMessage(element, text, isError = false) {
 // ---------- My solutions across all problems ----------
 async function loadMySolutions() {
   solutionsStatus.textContent = "Loading...";
+  const [totalResult, publicResult] = await Promise.all([
+      db.from("solutions")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", currentUser.id),
+
+      db.from("solutions")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", currentUser.id)
+        .eq("is_public", true)
+    ]);
+
+    if (!totalResult.error) {
+      solutionCount.textContent = totalResult.count ?? 0;
+    }
+
+    if (!publicResult.error) {
+      publicSolutionCount.textContent = publicResult.count ?? 0;
+    }
   const { data, error } = await db
     .from("solutions")
     .select("id, problem_id, user_id, content, is_public, created_at, updated_at, problems(title)")
@@ -93,6 +116,8 @@ usernameForm.addEventListener("submit", async function (event) {
       return;
     }
     currentUser.username = username;
+    profileUsername.textContent = username;
+    profileInitial.textContent = username.charAt(0).toUpperCase();
     showUsernameMessage("Username updated.", false);
   } catch (error) {
     console.error(error);
@@ -202,7 +227,12 @@ async function init() {
   }
 
   statusLine.textContent = "";
-  emailText.textContent = currentUser.email || "";
+  const username = currentUser.username || "MathWorld Member";
+
+  profileEmail.textContent = currentUser.email || "";
+  profileUsername.textContent = username;
+  profileInitial.textContent = username.charAt(0).toUpperCase();
+
   usernameInput.value = currentUser.username || "";
   accountContent.hidden = false;
   await loadMySolutions();

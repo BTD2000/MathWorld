@@ -27,64 +27,163 @@
 <body>
   <div class="layout">
     <nav class="sidebar" id="sidebar"></nav>
-    <main>
-      <h1>Account</h1>
-      <p id="statusLine"></p>
+    
+    <main class="account-main wide">
+      <div class="account-heading">
+        <div>
+          <p class="account-eyebrow">MATHWORLD MEMBER AREA</p>
+          <h1>My Account</h1>
+          <p class="account-subtitle">Manage your profile and track your mathematical journey.</p>
+        </div>
+      </div>
+
       <div id="accountContent" hidden>
+
+        <!-- Profile overview -->
+        <section class="account-profile card">
+          <div class="profile-avatar" aria-hidden="true">
+            <span id="profileInitial">?</span>
+          </div>
+
+          <div class="profile-info">
+            <p class="profile-label">YOUR PROFILE</p>
+            <h2 id="profileUsername">MathWorld Member</h2>
+            <p id="profileEmail" class="account-email"></p>
+          </div>
+
+          <span class="badge">Member</span>
+        </section>
+
+        <!-- Statistics -->
+        <section class="account-stats">
+          <div class="stat-card">
+            <span class="stat-label">Total Solutions</span>
+            <strong id="solutionCount">0</strong>
+            <span class="stat-description">Your submissions</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Public Solutions</span>
+            <strong id="publicSolutionCount">0</strong>
+            <span class="stat-description">Shared with everyone</span>
+          </div>
+        </section>
+
+        <!-- Profile settings -->
         <section class="account-section">
-          <h2>Profile</h2>
-          <div class="card">
-            <p class="account-email">Current email: <strong id="emailText"></strong></p>
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">PERSONAL INFORMATION</p>
+              <h2>Profile Settings</h2>
+            </div>
+          </div>
+
+          <div class="card account-settings-card">
             <form id="usernameForm">
               <label>Username
-                <input type="text" id="usernameInput" autocomplete="username"
-                       pattern="[A-Za-z0-9_]{3,30}" required>
-                <span class="auth-hint">3 to 30 characters: letters, numbers, underscore. This name is public.</span>
+                <input type="text" id="usernameInput"
+                      autocomplete="username"
+                      pattern="[A-Za-z0-9_]{3,30}" required>
+                <span class="auth-hint">
+                  3 to 30 characters: letters, numbers, underscore.
+                  This name is public.
+                </span>
               </label>
-              <button type="submit" class="btn btn-primary btn-small">Save username</button>
+
+              <button type="submit" class="btn btn-primary btn-small">
+                Save username
+              </button>
               <p id="usernameMessage" class="auth-message" role="status"></p>
             </form>
           </div>
         </section>
 
+        <!-- Security -->
         <section class="account-section">
-          <h2>Change email</h2>
-          <div class="card">
-            <form id="emailForm">
-              <label>New email
-                <input type="email" id="newEmailInput" autocomplete="email" required>
-              </label>
-              <label>Current password
-                <input type="password" id="emailCurrentPassword" autocomplete="current-password" required>
-              </label>
-              <button type="submit" class="btn btn-primary btn-small">Change email</button>
-              <p id="emailMessage" class="auth-message" role="status"></p>
-              <p class="auth-hint">You may need to confirm the change through an email sent by Supabase.</p>
-            </form>
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">ACCOUNT SECURITY</p>
+              <h2>Security Settings</h2>
+            </div>
+          </div>
+
+          <div class="account-security-grid">
+
+            <div class="card">
+              <h3>Change email</h3>
+              <p class="settings-description">
+                Update the email address associated with your account.
+              </p>
+
+              <form id="emailForm">
+                <label>New email
+                  <input type="email" id="newEmailInput"
+                        autocomplete="email" required>
+                </label>
+
+                <label>Current password
+                  <input type="password" id="emailCurrentPassword"
+                        autocomplete="current-password" required>
+                </label>
+
+                <button type="submit" class="btn btn-primary btn-small">
+                  Change email
+                </button>
+
+                <p id="emailMessage" class="auth-message" role="status"></p>
+                <p class="auth-hint">
+                  You may need to confirm the change through an email sent by Supabase.
+                </p>
+              </form>
+            </div>
+
+            <div class="card">
+              <h3>Change password</h3>
+              <p class="settings-description">
+                Secure your account by updating your password.
+              </p>
+
+              <form id="passwordForm">
+                <label>Current password
+                  <input type="password" id="passwordCurrentPassword"
+                        autocomplete="current-password" required>
+                </label>
+
+                <button type="submit" class="btn btn-primary btn-small">
+                  Verify and send confirmation email
+                </button>
+
+                <p id="passwordMessage" class="auth-message" role="status"></p>
+                <p class="auth-hint">
+                  We will email you a secure link to set your new password.
+                </p>
+              </form>
+            </div>
+
           </div>
         </section>
 
+        <!-- My solutions -->
         <section class="account-section">
-          <h2>Change password</h2>
-          <div class="card">
-            <form id="passwordForm">
-              <label>Current password
-                <input type="password" id="passwordCurrentPassword" autocomplete="current-password" required>
-              </label>
-              <button type="submit" class="btn btn-primary btn-small">Verify and send confirmation email</button>
-              <p id="passwordMessage" class="auth-message" role="status"></p>
-              <p class="auth-hint">After your current password is verified, we will email you a secure link. Open that link to set your new password.</p>
-            </form>
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">YOUR MATHEMATICAL WORK</p>
+              <h2>My Solutions</h2>
+              <p class="settings-description">
+                All the solutions you have submitted to MathWorld.
+              </p>
+            </div>
           </div>
-        </section>
 
-        <section class="account-section">
-          <h2>My solutions</h2>
           <p id="solutionsStatus"></p>
           <div id="solutionList"></div>
         </section>
+
       </div>
+
+      <p id="statusLine"></p>
     </main>
+
     <footer class="site-footer" id="siteFooter"></footer>
   </div>
 </body>

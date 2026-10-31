@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | MathWorld</title>
+
+  <script>
+    (() => {
+      const saved = localStorage.getItem("theme");
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme =
+        saved || (systemDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="solution-cards.js"></script>
+  <script defer src="profile.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main class="account-main wide">
+      <p class="account-eyebrow">MATHWORLD COMMUNITY</p>
+      <h1>User Profile</h1>
+
+      <p id="profileStatus">Loading profile...</p>
+
+      <div id="profileContent" hidden>
+        <section class="account-profile card">
+          <div class="profile-avatar" aria-hidden="true">
+            <span id="profileInitial">?</span>
+          </div>
+
+          <div class="profile-info">
+            <p class="profile-label">MATHWORLD MEMBER</p>
+            <h2 id="profileUsername"></h2>
+            <p id="profileJoined" class="account-email"></p>
+          </div>
+        </section>
+
+        <section class="account-stats">
+          <div class="stat-card">
+            <span class="stat-label">Total Public Solutions</span>
+            <strong id="publicSolutionCount">0</strong>
+            <span class="stat-description">Shared with everyone</span>
+          </div>
+        </section>
+
+        <section class="account-section">
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">MATHEMATICAL WORK</p>
+              <h2>Public Solutions</h2>
+            </div>
+          </div>
+
+          <p id="solutionsStatus"></p>
+          <div id="solutionList"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>
