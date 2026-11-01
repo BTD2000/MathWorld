@@ -228,6 +228,21 @@ async function init() {
 
   statusLine.textContent = "";
   const username = currentUser.username || "MathWorld Member";
+  const profileRole = document.getElementById("profileRole");
+
+  if (profileRole) {
+    const role = currentUser.role || "member";
+
+    profileRole.textContent =
+      role.charAt(0).toUpperCase() + role.slice(1);
+
+    profileRole.className = `badge role-${role}`;
+  }
+  const adminPanelSection = document.getElementById("adminPanelSection");
+
+  if (adminPanelSection) {
+    adminPanelSection.hidden = !["admin", "host"].includes(currentUser.role);
+  }
 
   profileEmail.textContent = currentUser.email || "";
   profileUsername.textContent = username;

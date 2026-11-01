@@ -20,7 +20,7 @@ async function loadVerifiedUser() {
   // 2. Does the account still have its profile?
   const { data: profile, error: profileError } = await db
     .from("profiles")
-    .select("username")
+    .select("username, role")
     .eq("id", data.user.id)
     .maybeSingle();
 
@@ -31,6 +31,7 @@ async function loadVerifiedUser() {
 
   const user = data.user;
   user.username = profile ? profile.username : null;
+  user.role = profile ? profile.role : "member";
   return user;
 }
 

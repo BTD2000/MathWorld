@@ -334,3 +334,35 @@ async function loadSolved() {
 updateSortIndicators();
 loadProblems();
 loadSolved();
+
+async function renderProblemAction() {
+  const actionContainer = document.getElementById("problemAction");
+
+  const { data: { user }, error } = await db.auth.getUser();
+
+  if (error || !user) return;
+
+  const { data: profile, error: profileError } = await db
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (profileError || !profile) return;
+
+  if (["member", "moderator"].includes(profile.role)) {
+    actionContainer.innerHTML = `
+      <a href="suggest-problem.html" class="btn">
+        Suggest a Problem
+      </a>
+    `;
+  } else if (["admin", "host"].includes(profile.role)) {
+    actionContainer.innerHTML = `
+      <a href="add-problem.html" class="btn">
+        Add a Problem
+      </a>
+    `;
+  }
+}
+
+renderProblemAction();

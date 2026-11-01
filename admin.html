@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Panel - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      document.documentElement.dataset.theme =
+        saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="admin.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Admin Panel</h1>
+      <p>Manage MathWorld from one place.</p>
+
+      <div class="admin-dashboard">
+        <a href="users.html" class="admin-card">
+          <h2>Users</h2>
+          <p>View users and manage their roles.</p>
+        </a>
+
+        <a href="suggestions.html" class="admin-card">
+          <h2>Problem Suggestions</h2>
+          <p>Review, approve, or reject submitted problems.</p>
+        </a>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>

@@ -1,10 +1,10 @@
-
 const profileStatus = document.getElementById("profileStatus");
 const profileContent = document.getElementById("profileContent");
 
 const profileInitial = document.getElementById("profileInitial");
 const profileUsername = document.getElementById("profileUsername");
 const profileJoined = document.getElementById("profileJoined");
+const profileRole = document.getElementById("profileRole");
 
 const publicSolutionCount = document.getElementById("publicSolutionCount");
 const solutionsStatus = document.getElementById("solutionsStatus");
@@ -71,7 +71,7 @@ async function loadProfile() {
 
   const { data: profile, error } = await db
     .from("profiles")
-    .select("id, username, created_at")
+    .select("id, username, created_at, role")
     .eq("username", username)
     .maybeSingle();
 
@@ -89,10 +89,22 @@ async function loadProfile() {
   profileStatus.textContent = "";
   profileContent.hidden = false;
 
+  // Username
   profileUsername.textContent = profile.username;
   profileInitial.textContent =
     profile.username.charAt(0).toUpperCase();
 
+  // Role badge
+  const role = profile.role || "member";
+
+  if (profileRole) {
+    profileRole.textContent =
+      role.charAt(0).toUpperCase() + role.slice(1);
+
+    profileRole.className = `badge role-${role}`;
+  }
+
+  // Joined date
   const joinedDate = new Date(profile.created_at);
 
   profileJoined.textContent = "Joined " +
@@ -102,8 +114,12 @@ async function loadProfile() {
       day: "numeric"
     });
 
+  // Public solutions
   await loadPublicSolutions(profile.id, profile.username);
 }
 
 // ---------- Start ----------
-loadProfile();
+loadProfile().catch(error => {
+  console.error("Profile loading error:", error);
+  profileStatus.textContent = "Something went wrong. Please try again.";
+});

@@ -1,8 +1,10 @@
+
 const params = new URLSearchParams(location.search);
 const problemId = Number(params.get("id"));
 
 const statusLine = document.getElementById("statusLine");
 const problemBox = document.getElementById("problemBox");
+const editProblemContainer = document.getElementById("editProblemContainer");
 const loginPrompt = document.getElementById("loginPrompt");
 const solutionForm = document.getElementById("solutionForm");
 const solutionText = document.getElementById("solutionText");
@@ -16,6 +18,11 @@ const infoRows = document.getElementById("infoRows");
 
 let currentUser = null;
 
+function canEditProblem() {
+  return currentUser !== null &&
+    ["moderator", "admin", "host"].includes(currentUser.role);
+}
+
 function typeset(element) {
   if (typeof renderMathInElement === "function") {
     renderMathInElement(element, {
@@ -23,7 +30,7 @@ function typeset(element) {
         { left: "$$", right: "$$", display: true },
         { left: "\\[", right: "\\]", display: true },
         { left: "$", right: "$", display: false },
-        { left: "\\(", right: "\\)", display: false}
+        { left: "\\(", right: "\\)", display: false }
       ],
       throwOnError: false
     });
@@ -50,7 +57,6 @@ function addInfoRow(label, content) {
   return td;
 }
 
-// Only allow normal web links (blocks things like "javascript:...")
 function safeUrl(value) {
   try {
     const url = new URL(value);
@@ -58,12 +64,11 @@ function safeUrl(value) {
       return url.href;
     }
   } catch (e) {
-    // not a valid URL
+    // Not a valid URL.
   }
   return null;
 }
 
-// "https://site.com/page"  or  "Label | https://site.com/page"
 function parseLink(entry) {
   const text = String(entry).trim();
   const separator = text.indexOf(" | ");
@@ -82,25 +87,21 @@ function parseLink(entry) {
 function renderInfo(data) {
   infoRows.replaceChildren();
 
-  if (data.source) {
-    addInfoRow("Source", data.source);
-  }
-  if (data.proposer) {
-    addInfoRow("Proposer", data.proposer);
-  }
-  if (data.topic) {
-    addInfoRow("Topic", data.topic);
-  }
+  if (data.source) addInfoRow("Source", data.source);
+  if (data.proposer) addInfoRow("Proposer", data.proposer);
+  if (data.topic) addInfoRow("Topic", data.topic);
 
   if (data.tags && data.tags.length > 0) {
     const list = document.createElement("div");
     list.className = "tag-list";
+
     for (const tag of data.tags) {
       const chip = document.createElement("span");
       chip.className = "badge badge-topic";
       chip.textContent = tag;
       list.append(chip);
     }
+
     addInfoRow("Tags", list);
   }
 
@@ -111,7 +112,6 @@ function renderInfo(data) {
     noteCell.className = "info-note";
   }
 
-  // See also: external links that open in a new tab
   const entries = Array.isArray(data.see_also) ? data.see_also : [];
   const wrap = document.createElement("div");
   wrap.className = "see-also-list";
@@ -122,10 +122,12 @@ function renderInfo(data) {
 
     const line = document.createElement("div");
     const link = document.createElement("a");
+
     link.href = item.href;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     link.textContent = item.label + " \u2197";
+
     line.append(link);
     wrap.append(line);
   }
@@ -168,21 +170,212 @@ async function loadProblem() {
   typeset(problemBox);
 
   renderInfo(data);
+  renderEditButton(data);
+
   return true;
 }
 
+// ---------- Edit problem button ----------
+function renderEditButton(data) {
+  editProblemContainer.replaceChildren();
+
+  if (!canEditProblem()) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "btn";
+  button.textContent = "Edit Problem";
+
+  button.addEventListener("click", function () {
+    openProblemEditor(data);
+  });
+
+  editProblemContainer.append(button);
+}
+
+// ---------- Edit problem form ----------
+function openProblemEditor(data) {
+  editProblemContainer.replaceChildren();
+
+  const form = document.createElement("form");
+  form.className = "card";
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+  });
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Edit Problem";
+  form.append(heading);
+
+  function addField(labelText, value, type = "input") {
+    const label = document.createElement("label");
+    label.className = "editor-label";
+    label.textContent = labelText;
+
+    let field;
+
+    if (type === "textarea") {
+      field = document.createElement("textarea");
+      field.rows = 5;
+    } else if (type === "select") {
+      field = document.createElement("select");
+    } else {
+      field = document.createElement("input");
+      field.type = "text";
+    }
+
+    field.value = value ?? "";
+    label.append(field);
+    form.append(label);
+
+    return field;
+  }
+
+  const title = addField("Title", data.title);
+  const statement = addField("Statement", data.statement, "textarea");
+
+  const topic = addField("Topic", data.topic, "select");
+  const topics = [
+    "Algebra",
+    "Combinatorics",
+    "Geometry",
+    "Number Theory"
+  ];
+
+  for (const name of topics) {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    topic.append(option);
+  }
+
+  if (data.topic && !topics.includes(data.topic)) {
+    const option = document.createElement("option");
+    option.value = data.topic;
+    option.textContent = data.topic;
+    topic.append(option);
+  }
+
+  topic.value = data.topic || "Algebra";
+
+  const difficulty = addField("Difficulty (1–14)", data.difficulty ?? "", "select");
+
+  const emptyOption = document.createElement("option");
+  emptyOption.value = "";
+  emptyOption.textContent = "Not specified";
+  difficulty.append(emptyOption);
+
+  for (let i = 1; i <= 14; i++) {
+    const option = document.createElement("option");
+    option.value = String(i);
+    option.textContent = String(i);
+    difficulty.append(option);
+  }
+
+  difficulty.value = data.difficulty ?? "";
+
+  const source = addField("Source", data.source);
+  const proposer = addField("Proposer", data.proposer);
+  const tags = addField("Tags (separated by commas)", (data.tags || []).join(", "));
+  const proposerNote = addField("Proposer's note", data.proposer_note, "textarea");
+  const seeAlso = addField("See also (one entry per line)", (data.see_also || []).join("\n"), "textarea");
+
+  const message = document.createElement("p");
+  message.className = "editor-message";
+
+  const actions = document.createElement("div");
+  actions.className = "solution-actions";
+
+  const save = document.createElement("button");
+  save.type = "submit";
+  save.className = "btn btn-primary";
+  save.textContent = "Save changes";
+
+  save.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    if (!canEditProblem()) {
+      message.textContent = "You do not have permission to edit problems.";
+      return;
+    }
+
+    if (!title.value.trim() || !statement.value.trim()) {
+      message.textContent = "Title and statement cannot be empty.";
+      return;
+    }
+
+    const difficultyValue = difficulty.value === ""
+      ? null
+      : Number(difficulty.value);
+
+    if (
+      difficultyValue !== null &&
+      (!Number.isInteger(difficultyValue) ||
+        difficultyValue < 1 ||
+        difficultyValue > 14)
+    ) {
+      message.textContent = "Difficulty must be between 1 and 14.";
+      return;
+    }
+
+    save.disabled = true;
+    message.textContent = "Saving...";
+
+    const updatedProblem = {
+      title: title.value.trim(),
+      statement: statement.value.trim(),
+      topic: topic.value,
+      difficulty: difficultyValue,
+      source: source.value.trim() || null,
+      proposer: proposer.value.trim() || null,
+      tags: tags.value.split(",").map(x => x.trim()).filter(Boolean),
+      proposer_note: proposerNote.value.trim() || null,
+      see_also: seeAlso.value.split("\n").map(x => x.trim()).filter(Boolean)
+    };
+
+    const { error } = await db
+      .from("problems")
+      .update(updatedProblem)
+      .eq("id", problemId);
+
+    if (error) {
+      message.textContent = error.message;
+      save.disabled = false;
+      return;
+    }
+
+    message.textContent = "Problem updated successfully.";
+    await loadProblem();
+  });
+
+  const cancel = document.createElement("button");
+  cancel.type = "button";
+  cancel.className = "btn";
+  cancel.textContent = "Cancel";
+
+  cancel.addEventListener("click", function () {
+    editProblemContainer.replaceChildren();
+    renderEditButton(data);
+  });
+
+  actions.append(save, cancel);
+  form.append(actions, message);
+  editProblemContainer.append(form);
+}
+
 // ---------- Live math preview while typing ----------
-// Returns a function that redraws the preview right away.
 function bindPreview(textarea, previewElement) {
   let timer = null;
 
   function update() {
     const text = textarea.value;
+
     if (text.trim() === "") {
       previewElement.hidden = true;
       previewElement.textContent = "";
       return;
     }
+
     previewElement.hidden = false;
     renderBBCode(previewElement, text);
     typeset(previewElement);
@@ -202,12 +395,14 @@ const updateFormPreview = bindPreview(solutionText, solutionPreview);
 function describeTime(row) {
   const created = new Date(row.created_at);
   let text = created.toLocaleString("en-US");
+
   if (row.updated_at) {
     const updated = new Date(row.updated_at);
     if (updated - created > 2000) {
       text += " (updated " + updated.toLocaleString("en-US") + ")";
     }
   }
+
   return text;
 }
 
@@ -228,10 +423,12 @@ function openEditor(card, row) {
   const preview = document.createElement("div");
   preview.className = "solution-preview";
   preview.hidden = true;
+
   const updatePreview = bindPreview(textarea, preview);
 
   const visibility = document.createElement("label");
   visibility.className = "inline";
+
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.checked = row.is_public;
@@ -247,14 +444,17 @@ function openEditor(card, row) {
   save.type = "button";
   save.className = "btn btn-primary btn-small";
   save.textContent = "Save changes";
+
   save.addEventListener("click", async function () {
     const content = textarea.value.trim();
+
     if (!content) {
       message.textContent = "The solution cannot be empty.";
       return;
     }
 
     save.disabled = true;
+
     const { error } = await db
       .from("solutions")
       .update({ content: content, is_public: checkbox.checked })
@@ -265,6 +465,7 @@ function openEditor(card, row) {
       save.disabled = false;
       return;
     }
+
     loadSolutions();
   });
 
@@ -272,6 +473,7 @@ function openEditor(card, row) {
   cancel.type = "button";
   cancel.className = "btn btn-small";
   cancel.textContent = "Cancel";
+
   cancel.addEventListener("click", function () {
     loadSolutions();
   });
@@ -284,7 +486,6 @@ function openEditor(card, row) {
 }
 
 // ---------- Build one solution card ----------
-
 function makeSolution(row, isMine) {
   const card = document.createElement("div");
   card.className = "card";
@@ -331,6 +532,7 @@ function makeSolution(row, isMine) {
     edit.type = "button";
     edit.className = "btn btn-small";
     edit.textContent = "Edit";
+
     edit.addEventListener("click", function () {
       openEditor(card, row);
     });
@@ -339,6 +541,7 @@ function makeSolution(row, isMine) {
     toggle.type = "button";
     toggle.className = "btn btn-small";
     toggle.textContent = row.is_public ? "Make private" : "Make public";
+
     toggle.addEventListener("click", async function () {
       const { error } = await db
         .from("solutions")
@@ -349,6 +552,7 @@ function makeSolution(row, isMine) {
         alert(error.message);
         return;
       }
+
       loadSolutions();
     });
 
@@ -356,6 +560,7 @@ function makeSolution(row, isMine) {
     remove.type = "button";
     remove.className = "btn btn-small";
     remove.textContent = "Delete";
+
     remove.addEventListener("click", async function () {
       if (!confirm("Delete this solution?")) return;
 
@@ -368,6 +573,7 @@ function makeSolution(row, isMine) {
         alert(error.message);
         return;
       }
+
       loadSolutions();
     });
 
@@ -377,7 +583,6 @@ function makeSolution(row, isMine) {
 
   return card;
 }
-
 
 // ---------- Load the solutions ----------
 async function loadSolutions() {
@@ -398,6 +603,7 @@ async function loadSolutions() {
 
   for (const row of data) {
     const mine = currentUser !== null && row.user_id === currentUser.id;
+
     if (mine) {
       myList.append(makeSolution(row, true));
     } else {
@@ -446,6 +652,7 @@ async function init() {
   }
 
   currentUser = await getVerifiedUser();
+
   loginPrompt.hidden = currentUser !== null;
   solutionForm.hidden = currentUser === null;
 
