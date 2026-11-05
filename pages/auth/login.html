@@ -5,7 +5,26 @@
      ===================================================== -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <!--
+    BASE PATH
+    GitHub Pages project sites are served from /MathWorld/.
+    Local development and custom domains are served from /.
+    Keep this bootstrap before all local CSS and JavaScript references.
+  -->
+  <script>
+    (function () {
+      const isGitHubPages = window.location.hostname.endsWith("github.io");
+      const basePath = isGitHubPages ? "/MathWorld/" : "/";
+      const baseElement = document.createElement("base");
+      baseElement.href = basePath;
+      document.head.appendChild(baseElement);
+
+      window.mwUrl = function (path) {
+        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
+      };
+    })();
+  </script>
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Log in - MathWorld</title>
   <script>
@@ -15,13 +34,13 @@
       document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
     })();
   </script>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="/assets/js/core/supabase-client.js"></script>
-  <script defer src="/assets/js/core/layout.js"></script>
-  <script defer src="/assets/js/core/auth-ui.js"></script>
-  <script defer src="/assets/js/core/script.js"></script>
-  <script defer src="/assets/js/core/auth.js"></script>
+  <script defer src="assets/js/core/supabase-client.js"></script>
+  <script defer src="assets/js/core/layout.js"></script>
+  <script defer src="assets/js/core/auth-ui.js"></script>
+  <script defer src="assets/js/core/script.js"></script>
+  <script defer src="assets/js/core/auth.js"></script>
 </head>
 <body data-mode="login">
   <div class="layout">
@@ -43,7 +62,7 @@
           <button type="submit" class="btn btn-primary">Log in</button>
         </form>
         <p id="message" class="auth-message" role="status"></p>
-        <p class="auth-switch">No account yet? <a href="/pages/auth/signup.html">Sign up</a></p>
+        <p class="auth-switch">No account yet? <a href="pages/auth/signup.html">Sign up</a></p>
       </div>
     </main>
     <footer class="site-footer" id="siteFooter"></footer>

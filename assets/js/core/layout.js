@@ -7,25 +7,25 @@
 const NAV_HTML = `
   <h2>Contents</h2>
   <ul>
-    <li><a href="/index.html">Home</a></li>
-    <li><a href="/pages/problems/problems.html">Problems</a></li>
-    <li><a href="/pages/contests/contests.html">Contests</a></li>
-    <li><a href="/pages/info/theme.html">Themes</a></li>
-    <li><a href="/pages/info/about.html">About</a></li>
+    <li><a href="${mwUrl("index.html")}">Home</a></li>
+    <li><a href="${mwUrl("pages/problems/problems.html")}">Problems</a></li>
+    <li><a href="${mwUrl("pages/contests/contests.html")}">Contests</a></li>
+    <li><a href="${mwUrl("pages/info/theme.html")}">Themes</a></li>
+    <li><a href="${mwUrl("pages/info/about.html")}">About</a></li>
   </ul>
   <div class="sidebar-actions">
-    <a href="/pages/community/account.html" class="btn btn-primary" id="accountLink" hidden>Account</a>
+    <a href="${mwUrl("pages/community/account.html")}" class="btn btn-primary" id="accountLink" hidden>Account</a>
     <button type="button" class="btn" id="logoutButton" hidden>Log out</button>
-    <a href="/pages/auth/login.html" class="btn" id="loginLink">Login</a>
-    <a href="/pages/auth/signup.html" class="btn btn-primary" id="signupLink">Signup</a>
+    <a href="${mwUrl("pages/auth/login.html")}" class="btn" id="loginLink">Login</a>
+    <a href="${mwUrl("pages/auth/signup.html")}" class="btn btn-primary" id="signupLink">Signup</a>
   </div>
 `;
 
 const FOOTER_HTML = `
   <span>&copy; 2026 MathWorld</span>
-  <a href="/index.html">Home</a>
-  <a href="/pages/problems/problems.html">Problems</a>
-  <a href="/pages/info/about.html">About</a>
+  <a href="${mwUrl("index.html")}">Home</a>
+  <a href="${mwUrl("pages/problems/problems.html")}">Problems</a>
+  <a href="${mwUrl("pages/info/about.html")}">About</a>
 `;
 
 const sidebarElement = document.getElementById("sidebar");

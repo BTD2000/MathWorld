@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { data: { user }, error: authError } = await db.auth.getUser();
 
     if (authError || !user) {
-      window.location.replace("/index.html");
+      window.location.replace(mwUrl("index.html"));
       return;
     }
 
@@ -19,10 +19,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       .single();
 
     if (error || !profile || !["host", "admin"].includes(profile.role)) {
-      window.location.replace("/index.html");
+      window.location.replace(mwUrl("index.html"));
     }
   } catch (error) {
     console.error("Admin access error:", error);
-    window.location.replace("/index.html");
+    window.location.replace(mwUrl("index.html"));
   }
 });

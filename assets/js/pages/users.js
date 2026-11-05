@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { data: { user }, error: authError } = await db.auth.getUser();
 
     if (authError || !user) {
-      window.location.replace("/index.html");
+      window.location.replace(mwUrl("index.html"));
       return;
     }
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     currentRole = profile.role;
 
     if (!["host", "admin"].includes(currentRole)) {
-      window.location.replace("/index.html");
+      window.location.replace(mwUrl("index.html"));
       return;
     }
 

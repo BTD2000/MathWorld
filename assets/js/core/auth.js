@@ -27,7 +27,7 @@ if (forgotPasswordButton) {
 
     forgotPasswordButton.disabled = true;
     try {
-      const redirectTo = new URL("/pages/auth/update-password.html", window.location.origin).href;
+      const redirectTo = mwUrl("pages/auth/update-password.html");
       const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo });
       if (error) {
         showMessage(error.message, true);
@@ -57,7 +57,7 @@ if (forgotPasswordButton) {
 // Already logged in? Go to the home page.
 (async function () {
   const user = await getVerifiedUser();
-  if (user) window.location.replace("/index.html");
+  if (user) window.location.replace(mwUrl("index.html"));
 })();
 
 async function handleSignup(email, password) {
@@ -74,7 +74,7 @@ async function handleSignup(email, password) {
     password,
     options: {
       data: { username },
-      emailRedirectTo: new URL("/pages/auth/login.html", window.location.origin).href
+      emailRedirectTo: mwUrl("pages/auth/login.html")
     }
   });
 
@@ -90,7 +90,7 @@ async function handleSignup(email, password) {
     return;
   }
   if (data.session) {
-    window.location.href = "/index.html";
+    window.location.href = mwUrl("index.html");
     return;
   }
 
@@ -106,7 +106,7 @@ async function handleLogin(email, password) {
       : error.message, true);
     return;
   }
-  window.location.href = "/index.html";
+  window.location.href = mwUrl("index.html");
 }
 
 authForm.addEventListener("submit", async function (event) {

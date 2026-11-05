@@ -6,7 +6,26 @@
      ===================================================== -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <!--
+    BASE PATH
+    GitHub Pages project sites are served from /MathWorld/.
+    Local development and custom domains are served from /.
+    Keep this bootstrap before all local CSS and JavaScript references.
+  -->
+  <script>
+    (function () {
+      const isGitHubPages = window.location.hostname.endsWith("github.io");
+      const basePath = isGitHubPages ? "/MathWorld/" : "/";
+      const baseElement = document.createElement("base");
+      baseElement.href = basePath;
+      document.head.appendChild(baseElement);
+
+      window.mwUrl = function (path) {
+        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
+      };
+    })();
+  </script>
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile | MathWorld</title>
 
@@ -19,15 +38,15 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0"></script>
-  <script defer src="/assets/js/core/supabase-client.js"></script>
-  <script defer src="/assets/js/core/layout.js"></script>
-  <script defer src="/assets/js/core/auth-ui.js"></script>
-  <script defer src="/assets/js/core/script.js"></script>
-  <script defer src="/assets/js/components/solution-cards.js"></script>
-  <script defer src="/assets/js/pages/profile.js"></script>
+  <script defer src="assets/js/core/supabase-client.js"></script>
+  <script defer src="assets/js/core/layout.js"></script>
+  <script defer src="assets/js/core/auth-ui.js"></script>
+  <script defer src="assets/js/core/script.js"></script>
+  <script defer src="assets/js/components/solution-cards.js"></script>
+  <script defer src="assets/js/pages/profile.js"></script>
 </head>
 
 <body>

@@ -5,7 +5,26 @@
      ===================================================== -->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <!--
+    BASE PATH
+    GitHub Pages project sites are served from /MathWorld/.
+    Local development and custom domains are served from /.
+    Keep this bootstrap before all local CSS and JavaScript references.
+  -->
+  <script>
+    (function () {
+      const isGitHubPages = window.location.hostname.endsWith("github.io");
+      const basePath = isGitHubPages ? "/MathWorld/" : "/";
+      const baseElement = document.createElement("base");
+      baseElement.href = basePath;
+      document.head.appendChild(baseElement);
+
+      window.mwUrl = function (path) {
+        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
+      };
+    })();
+  </script>
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About - MathWorld</title>
 
@@ -17,12 +36,12 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="/assets/js/core/supabase-client.js"></script>
-  <script defer src="/assets/js/core/layout.js"></script>
-  <script defer src="/assets/js/core/auth-ui.js"></script>
-  <script defer src="/assets/js/core/script.js"></script>
+  <script defer src="assets/js/core/supabase-client.js"></script>
+  <script defer src="assets/js/core/layout.js"></script>
+  <script defer src="assets/js/core/auth-ui.js"></script>
+  <script defer src="assets/js/core/script.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -95,7 +114,7 @@
       </p>
 
       <div class="guides-grid">
-        <a href="/pages/info/bbcode.html" class="card guide-card">
+        <a href="pages/info/bbcode.html" class="card guide-card">
           <h3>BBCode Guide</h3>
           <p>
             Learn how to format text, create lists, insert links,
@@ -104,7 +123,7 @@
           <span>Explore BBCode</span>
         </a>
 
-        <a href="/pages/info/latex.html" class="card guide-card">
+        <a href="pages/info/latex.html" class="card guide-card">
           <h3>LaTeX Guide</h3>
           <p>
             Learn how to write mathematical expressions, equations,

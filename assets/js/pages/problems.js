@@ -110,7 +110,7 @@ function makeRow(problem) {
 
   const titleCell = document.createElement("td");
   const link = document.createElement("a");
-  link.href = "/pages/problems/problem.html?id=" + problem.id;
+  link.href = mwUrl("pages/problems/problem.html") + "?id=" + problem.id;
   link.textContent = problem.title;
   titleCell.append(link);
   if (solvedIds.has(problem.id)) {
@@ -357,13 +357,13 @@ async function renderProblemAction() {
 
   if (["member", "moderator"].includes(profile.role)) {
     actionContainer.innerHTML = `
-      <a href="/pages/problems/suggest-problem.html" class="btn">
+      <a href="${mwUrl("pages/problems/suggest-problem.html")}" class="btn">
         Suggest a Problem
       </a>
     `;
   } else if (["admin", "host"].includes(profile.role)) {
     actionContainer.innerHTML = `
-      <a href="/pages/problems/add-problem.html" class="btn">
+      <a href="${mwUrl("pages/problems/add-problem.html")}" class="btn">
         Add a Problem
       </a>
     `;
