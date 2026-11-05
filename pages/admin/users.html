@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<!-- =====================================================
+     PAGE: Users
+     PURPOSE: Allow administrators to review and manage user accounts.
+     ===================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Users - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      document.documentElement.dataset.theme =
+        saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="/assets/js/core/supabase-client.js"></script>
+  <script defer src="/assets/js/core/layout.js"></script>
+  <script defer src="/assets/js/core/auth-ui.js"></script>
+  <script defer src="/assets/js/core/script.js"></script>
+  <script defer src="/assets/js/pages/users.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Users</h1>
+      <p>View users and manage their roles.</p>
+
+      <a href="/pages/admin/admin.html" class="btn btn-small">← Admin Panel</a>
+
+      <section class="admin-users">
+        <div id="users-list">
+          <p>Loading users...</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>

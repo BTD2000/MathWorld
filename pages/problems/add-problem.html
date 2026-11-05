@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<!-- =====================================================
+     PAGE: Add Problem
+     PURPOSE: Provide the form for adding a new problem.
+     ===================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Problem - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="/assets/js/core/supabase-client.js"></script>
+  <script defer src="/assets/js/core/layout.js"></script>
+  <script defer src="/assets/js/core/auth-ui.js"></script>
+  <script defer src="/assets/js/core/script.js"></script>
+  <script defer src="/assets/js/pages/add-problem.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Add a Problem</h1>
+      <p>Add a new problem directly to the MathWorld problem collection.</p>
+
+      <form id="problemForm">
+        <label class="filter-field">
+          Title
+          <input type="text" id="title" required>
+        </label>
+
+        <label class="filter-field">
+          Statement
+          <textarea id="statement" rows="8" required></textarea>
+        </label>
+
+        <label class="filter-field">
+          Topic
+          <select id="topic" required>
+            <option value="">Select a topic</option>
+            <option value="Algebra">Algebra</option>
+            <option value="Combinatorics">Combinatorics</option>
+            <option value="Geometry">Geometry</option>
+            <option value="Number Theory">Number Theory</option>
+          </select>
+        </label>
+
+        <label class="filter-field">
+          Difficulty
+          <input type="number" id="difficulty" min="1" max="14">
+        </label>
+
+        <label class="filter-field">
+          Source
+          <input type="text" id="source">
+        </label>
+
+        <label class="filter-field">
+          Proposer
+          <input type="text" id="proposer">
+        </label>
+
+        <label class="filter-field">
+          Tags
+          <input type="text" id="tags" placeholder="e.g. Inequality, IMO">
+        </label>
+
+        <label class="filter-field">
+          Proposer note
+          <textarea id="proposerNote" rows="3"></textarea>
+        </label>
+
+        <label class="filter-field">
+          See also
+          <input type="text" id="seeAlso" placeholder="e.g. 12, 25, 38">
+        </label>
+
+        <button type="submit" class="btn" id="submitProblem">
+          Add Problem
+        </button>
+
+        <p id="problemMessage"></p>
+      </form>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>

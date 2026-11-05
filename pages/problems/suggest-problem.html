@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<!-- =====================================================
+     PAGE: Suggest Problem
+     PURPOSE: Provide the form for suggesting a problem.
+     ===================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Suggest a Problem - MathWorld</title>
+
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      document.documentElement.dataset.theme =
+        saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script defer src="/assets/js/core/supabase-client.js"></script>
+  <script defer src="/assets/js/core/layout.js"></script>
+  <script defer src="/assets/js/core/auth-ui.js"></script>
+  <script defer src="/assets/js/core/script.js"></script>
+  <script defer src="/assets/js/pages/suggest-problem.js"></script>
+</head>
+
+<body>
+  <div class="layout">
+
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <main>
+      <h1>Suggest a Problem</h1>
+
+      <p>
+        Have an interesting mathematics problem?
+        Share it with the MathWorld community!
+      </p>
+
+      <section class="suggestion-form-section">
+        <form id="suggestionForm">
+
+          <div class="form-group">
+            <label for="title">Problem Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              maxlength="200"
+              placeholder="Enter the problem title"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="statement">Problem Statement</label>
+            <textarea
+              id="statement"
+              name="statement"
+              rows="8"
+              required
+              placeholder="Write the full problem statement..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic" required>
+              <option value="">Select a topic</option>
+              <option value="Algebra">Algebra</option>
+              <option value="Combinatorics">Combinatorics</option>
+              <option value="Geometry">Geometry</option>
+              <option value="Number Theory">Number Theory</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty" name="difficulty">
+              <option value="">Not specified</option>
+              <option value="1">1 - Very Easy</option>
+              <option value="2">2 - Easy</option>
+              <option value="3">3 - Medium</option>
+              <option value="4">4 - Hard</option>
+              <option value="5">5 - Very Hard</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="source">Source</label>
+            <input
+              type="text"
+              id="source"
+              name="source"
+              placeholder="Where did you find this problem?"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input
+              type="text"
+              id="tags"
+              name="tags"
+              placeholder="e.g. Inequalities, Polynomials, Primes"
+            >
+            <small>Separate tags with commas.</small>
+          </div>
+
+          <div class="form-group">
+            <label for="proposer">Original Author</label>
+            <input
+              type="text"
+              id="proposer"
+              name="proposer"
+              placeholder="Problem author's name (if known)"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="proposerNote">Additional Note</label>
+            <textarea
+              id="proposerNote"
+              name="proposerNote"
+              rows="3"
+              placeholder="Any additional information..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="seeAlso">See Also</label>
+            <input
+              type="text"
+              id="seeAlso"
+              name="seeAlso"
+              placeholder="Related problem IDs"
+            >
+            <small>Separate problem IDs with commas.</small>
+          </div>
+
+          <button type="submit" id="submitSuggestion">
+            Submit Suggestion
+          </button>
+
+          <p id="suggestionMessage" role="status"></p>
+
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+
+  </div>
+</body>
+</html>

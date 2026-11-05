@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!-- =====================================================
+     PAGE: Account
+     PURPOSE: Display account information, settings, and personal solutions.
+     ===================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Account - MathWorld</title>
+  <script>
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="/assets/js/components/bbcode.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
+  <script defer src="/assets/js/core/supabase-client.js"></script>
+  <script defer src="/assets/js/core/layout.js"></script>
+  <script defer src="/assets/js/core/auth-ui.js"></script>
+  <script defer src="/assets/js/core/script.js"></script>
+  <script defer src="/assets/js/components/solution-cards.js"></script>
+  <script defer src="/assets/js/pages/account.js"></script>
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar" id="sidebar"></nav>
+    
+    <main class="account-main wide">
+      <div class="account-heading">
+        <div>
+          <p class="account-eyebrow">MATHWORLD MEMBER AREA</p>
+          <h1>My Account</h1>
+          <p class="account-subtitle">Manage your profile and track your mathematical journey.</p>
+        </div>
+      </div>
+
+      <div id="accountContent" hidden>
+
+        <!-- Profile overview -->
+        <section class="account-profile card">
+          <div class="profile-avatar" aria-hidden="true">
+            <span id="profileInitial">?</span>
+          </div>
+
+          <div class="profile-info">
+            <p class="profile-label">YOUR PROFILE</p>
+            <h2 id="profileUsername">MathWorld Member</h2>
+            <p id="profileEmail" class="account-email"></p>
+          </div>
+
+          <span class="badge" id="profileRole">Member</span>
+        </section>
+
+        <!-- Statistics -->
+        <section class="account-stats">
+          <div class="stat-card">
+            <span class="stat-label">Total Solutions</span>
+            <strong id="solutionCount">0</strong>
+            <span class="stat-description">Your submissions</span>
+          </div>
+
+          <div class="stat-card">
+            <span class="stat-label">Public Solutions</span>
+            <strong id="publicSolutionCount">0</strong>
+            <span class="stat-description">Shared with everyone</span>
+          </div>
+        </section>
+
+        <div id="adminPanelSection" hidden>
+          <h2>Administration</h2>
+          <a href="/pages/admin/admin.html" class="btn btn-primary">
+            Open Admin Panel
+          </a>
+        </div>
+
+        <!-- Profile settings -->
+        <section class="account-section">
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">PERSONAL INFORMATION</p>
+              <h2>Profile Settings</h2>
+            </div>
+          </div>
+
+          <div class="card account-settings-card">
+            <form id="usernameForm">
+              <label>Username
+                <input type="text" id="usernameInput"
+                      autocomplete="username"
+                      pattern="[A-Za-z0-9_]{3,30}" required>
+                <span class="auth-hint">
+                  3 to 30 characters: letters, numbers, underscore.
+                  This name is public.
+                </span>
+              </label>
+
+              <button type="submit" class="btn btn-primary btn-small">
+                Save username
+              </button>
+              <p id="usernameMessage" class="auth-message" role="status"></p>
+            </form>
+          </div>
+        </section>
+
+        <!-- Security -->
+        <section class="account-section">
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">ACCOUNT SECURITY</p>
+              <h2>Security Settings</h2>
+            </div>
+          </div>
+
+          <div class="account-security-grid">
+
+            <div class="card">
+              <h3>Change email</h3>
+              <p class="settings-description">
+                Update the email address associated with your account.
+              </p>
+
+              <form id="emailForm">
+                <label>New email
+                  <input type="email" id="newEmailInput"
+                        autocomplete="email" required>
+                </label>
+
+                <label>Current password
+                  <input type="password" id="emailCurrentPassword"
+                        autocomplete="current-password" required>
+                </label>
+
+                <button type="submit" class="btn btn-primary btn-small">
+                  Change email
+                </button>
+
+                <p id="emailMessage" class="auth-message" role="status"></p>
+                <p class="auth-hint">
+                  You may need to confirm the change through an email sent by Supabase.
+                </p>
+              </form>
+            </div>
+
+            <div class="card">
+              <h3>Change password</h3>
+              <p class="settings-description">
+                Secure your account by updating your password.
+              </p>
+
+              <form id="passwordForm">
+                <label>Current password
+                  <input type="password" id="passwordCurrentPassword"
+                        autocomplete="current-password" required>
+                </label>
+
+                <button type="submit" class="btn btn-primary btn-small">
+                  Verify and send confirmation email
+                </button>
+
+                <p id="passwordMessage" class="auth-message" role="status"></p>
+                <p class="auth-hint">
+                  We will email you a secure link to set your new password.
+                </p>
+              </form>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- My solutions -->
+        <section class="account-section">
+          <div class="account-section-heading">
+            <div>
+              <p class="section-eyebrow">YOUR MATHEMATICAL WORK</p>
+              <h2>My Solutions</h2>
+              <p class="settings-description">
+                All the solutions you have submitted to MathWorld.
+              </p>
+            </div>
+          </div>
+
+          <p id="solutionsStatus"></p>
+          <div id="solutionList"></div>
+        </section>
+
+      </div>
+
+      <p id="statusLine"></p>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+</body>
+</html>
