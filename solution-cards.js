@@ -49,7 +49,7 @@ function makeSolutionCard(row, options = {}) {
   const title = document.createElement("h3");
   const problemLink = document.createElement("a");
 
-  problemLink.href = mwUrl("pages/problems/problem.html") + "?id=" + encodeURIComponent(row.problem_id);
+  problemLink.href = mwUrl("problem.html") + "?id=" + encodeURIComponent(row.problem_id);
   problemLink.textContent = row.problems?.title ||
     "Problem " + row.problem_id;
 
@@ -72,7 +72,7 @@ function makeSolutionCard(row, options = {}) {
     const authorLink = document.createElement("a");
 
     authorLink.href = options.profileUrl ||
-      mwUrl("pages/community/profile.html") + "?username=" + encodeURIComponent(options.username);
+      mwUrl("profile.html") + "?username=" + encodeURIComponent(options.username);
 
     authorLink.textContent = options.authorName || options.username;
     meta.append(authorLink);

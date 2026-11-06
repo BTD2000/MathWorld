@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
 <!-- =====================================================
-     PAGE: Suggestions
-     PURPOSE: Allow administrators to review problem suggestions.
+     PAGE: Users
+     PURPOSE: Allow administrators to review and manage user accounts.
      ===================================================== -->
 <html lang="en">
 <head>
@@ -27,7 +27,7 @@
   </script>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Problem Suggestions - MathWorld</title>
+  <title>Users - MathWorld</title>
 
   <script>
     (function () {
@@ -41,14 +41,14 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="assets/js/core/supabase-client.js"></script>
-  <script defer src="assets/js/core/layout.js"></script>
-  <script defer src="assets/js/core/auth-ui.js"></script>
-  <script defer src="assets/js/core/script.js"></script>
-  <script defer src="assets/js/pages/suggestions.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="users.js"></script>
 </head>
 
 <body>
@@ -56,14 +56,14 @@
     <nav class="sidebar" id="sidebar"></nav>
 
     <main>
-      <h1>Problem Suggestions</h1>
-      <p>Review, approve, or reject submitted problems.</p>
+      <h1>Users</h1>
+      <p>View users and manage their roles.</p>
 
-      <a href="pages/admin/admin.html" class="btn btn-small">← Admin Panel</a>
+      <a href="admin.html" class="btn btn-small">← Admin Panel</a>
 
-      <section class="admin-suggestions">
-        <div id="suggestions-list">
-          <p>Loading suggestions...</p>
+      <section class="admin-users">
+        <div id="users-list">
+          <p>Loading users...</p>
         </div>
       </section>
     </main>

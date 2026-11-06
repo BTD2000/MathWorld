@@ -27,7 +27,7 @@ if (forgotPasswordButton) {
 
     forgotPasswordButton.disabled = true;
     try {
-      const redirectTo = mwUrl("pages/auth/update-password.html");
+      const redirectTo = mwUrl("update-password.html");
       const { error } = await db.auth.resetPasswordForEmail(email, { redirectTo });
       if (error) {
         showMessage(error.message, true);
@@ -74,7 +74,7 @@ async function handleSignup(email, password) {
     password,
     options: {
       data: { username },
-      emailRedirectTo: mwUrl("pages/auth/login.html")
+      emailRedirectTo: mwUrl("login.html")
     }
   });
 

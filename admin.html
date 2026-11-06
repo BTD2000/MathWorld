@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <!-- =====================================================
-     PAGE: Users
-     PURPOSE: Allow administrators to review and manage user accounts.
+     PAGE: Admin
+     PURPOSE: Provide the administration dashboard and management links.
      ===================================================== -->
 <html lang="en">
 <head>
@@ -27,7 +26,7 @@
   </script>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Users - MathWorld</title>
+  <title>Admin Panel - MathWorld</title>
 
   <script>
     (function () {
@@ -41,34 +40,40 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
 
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="assets/js/core/supabase-client.js"></script>
-  <script defer src="assets/js/core/layout.js"></script>
-  <script defer src="assets/js/core/auth-ui.js"></script>
-  <script defer src="assets/js/core/script.js"></script>
-  <script defer src="assets/js/pages/users.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="admin.js"></script>
 </head>
 
 <body>
   <div class="layout">
+
     <nav class="sidebar" id="sidebar"></nav>
 
     <main>
-      <h1>Users</h1>
-      <p>View users and manage their roles.</p>
+      <h1>Admin Panel</h1>
+      <p>Manage MathWorld from one place.</p>
 
-      <a href="pages/admin/admin.html" class="btn btn-small">← Admin Panel</a>
+      <div class="admin-dashboard">
+        <a href="users.html" class="admin-card">
+          <h2>Users</h2>
+          <p>View users and manage their roles.</p>
+        </a>
 
-      <section class="admin-users">
-        <div id="users-list">
-          <p>Loading users...</p>
-        </div>
-      </section>
+        <a href="suggestions.html" class="admin-card">
+          <h2>Problem Suggestions</h2>
+          <p>Review, approve, or reject submitted problems.</p>
+        </a>
+      </div>
     </main>
 
     <footer class="site-footer" id="siteFooter"></footer>
+
   </div>
 </body>
 </html>

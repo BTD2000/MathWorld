@@ -36,17 +36,17 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-  <script src="assets/js/components/bbcode.js"></script>
+  <script src="bbcode.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
-  <script defer src="assets/js/core/supabase-client.js"></script>
-  <script defer src="assets/js/core/layout.js"></script>
-  <script defer src="assets/js/core/auth-ui.js"></script>
-  <script defer src="assets/js/core/script.js"></script>
-  <script defer src="assets/js/pages/problem.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="problem.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -54,7 +54,7 @@
     <nav class="sidebar" id="sidebar"></nav>
 
     <main class="wide">
-      <p><a href="pages/problems/problems.html">&larr; All problems</a></p>
+      <p><a href="problems.html">&larr; All problems</a></p>
       <p id="statusLine"></p>
 
       <div class="problem-layout">
@@ -65,7 +65,7 @@
 
           <h2>My solutions</h2>
           <p id="loginPrompt" hidden>
-            <a href="pages/auth/login.html">Log in</a> to save your own solution.
+            <a href="login.html">Log in</a> to save your own solution.
           </p>
 
           <form id="solutionForm" hidden>

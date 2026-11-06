@@ -34,18 +34,18 @@
       document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
     })();
   </script>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
-  <script src="assets/js/components/bbcode.js"></script>
+  <script src="bbcode.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
-  <script defer src="assets/js/core/supabase-client.js"></script>
-  <script defer src="assets/js/core/layout.js"></script>
-  <script defer src="assets/js/core/auth-ui.js"></script>
-  <script defer src="assets/js/core/script.js"></script>
-  <script defer src="assets/js/components/solution-cards.js"></script>
-  <script defer src="assets/js/pages/account.js"></script>
+  <script defer src="supabase-client.js"></script>
+  <script defer src="layout.js"></script>
+  <script defer src="auth-ui.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="solution-cards.js"></script>
+  <script defer src="account.js"></script>
 </head>
 <body>
   <div class="layout">
@@ -94,7 +94,7 @@
 
         <div id="adminPanelSection" hidden>
           <h2>Administration</h2>
-          <a href="pages/admin/admin.html" class="btn btn-primary">
+          <a href="admin.html" class="btn btn-primary">
             Open Admin Panel
           </a>
         </div>
