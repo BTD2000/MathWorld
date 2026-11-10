@@ -69,6 +69,6 @@ function getVerifiedUser() {
 
   logoutButton.addEventListener("click", async function () {
     await db.auth.signOut();
-    window.location.href = mwUrl("index.html");
+    window.location.href = "index.html";
   });
 })();

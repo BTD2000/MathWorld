@@ -160,7 +160,7 @@ emailForm.addEventListener("submit", async function (event) {
       return;
     }
 
-    const redirectTo = mwUrl("account.html");
+    const redirectTo = "account.html";
     const { error } = await db.auth.updateUser(
       { email: newEmail },
       { emailRedirectTo: redirectTo }
@@ -203,7 +203,7 @@ passwordForm.addEventListener("submit", async function (event) {
       return;
     }
 
-    const redirectTo = mwUrl("update-password.html");
+    const redirectTo = "update-password.html";
     const { error } = await db.auth.resetPasswordForEmail(currentUser.email, { redirectTo });
     if (error) {
       showFormMessage(passwordMessage, error.message, true);
@@ -225,7 +225,7 @@ async function init() {
   currentUser = await getVerifiedUser();
   if (!currentUser) {
     const link = document.createElement("a");
-    link.href = mwUrl("login.html");
+    link.href = "login.html";
     link.textContent = "Log in";
     statusLine.replaceChildren(link, " to see your account.");
     return;

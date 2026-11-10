@@ -1,85 +1,91 @@
+
 <!DOCTYPE html>
-<!-- =====================================================
-     PAGE: Signup
-     PURPOSE: Provide the new account registration form.
-     ===================================================== -->
 <html lang="en">
 <head>
-    <!--
-    BASE PATH
-    GitHub Pages project sites are served from /MathWorld/.
-    Local development and custom domains are served from /.
-    Keep this bootstrap before all local CSS and JavaScript references.
-  -->
-  <script>
-    (function () {
-      const isGitHubPages = window.location.hostname.endsWith("github.io");
-      const basePath = isGitHubPages ? "/MathWorld/" : "/";
-      const baseElement = document.createElement("base");
-      baseElement.href = basePath;
-      document.head.appendChild(baseElement);
+    <!-- Basic Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page description">
 
-      window.mwUrl = function (path) {
-        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
-      };
-    })();
-  </script>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign up - MathWorld</title>
+    <!-- Page Title -->
+    <title>Page Title - MathWorld</title>
 
-  <script>
-    (function () {
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
-    })();
-  </script>
+    <!-- Theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme =
+                saved || (prefersDark ? "dark" : "light");
+        })();
+    </script>
 
-  <link rel="stylesheet" href="style.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.110.1/dist/umd/supabase.js"></script>
-  <script defer src="supabase-client.js"></script>
-  <script defer src="layout.js"></script>
-  <script defer src="auth-ui.js"></script>
-  <script defer src="script.js"></script>
-  <script defer src="auth.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- BBCode -->
+    <script defer src="bbcode.js"></script>
+
+    <!-- Core JavaScript -->
+    <script defer src="supabase-client.js"></script>
+    <script defer src="layout.js"></script>
+    <script defer src="auth-ui.js"></script>
+    <script defer src="script.js"></script>
+
+    <!-- Page JavaScript -->
+    <script defer src="auth.js"></script>
 </head>
-<body data-mode="signup">
-  <div class="layout">
+<body>
 
-    <nav class="sidebar" id="sidebar"></nav>
+    <div class="layout">
 
-    <main>
-      <h1>Sign up</h1>
-      <p>Create an account to save your own solutions.</p>
+        <!-- Navigation -->
+        <nav class="sidebar" id="sidebar"></nav>
 
-      <div class="auth-card">
-        <form id="authForm">
-          <label>Username
-            <input type="text" id="username" autocomplete="username"
-                   pattern="[A-Za-z0-9_]{3,30}" required>
-            <span class="auth-hint">3 to 30 characters: letters, numbers, underscore. This name is public.</span>
-          </label>
-          <label>Email
-            <input type="email" id="email" autocomplete="email" required>
-          </label>
-          <label>Password
-            <input type="password" id="password" autocomplete="new-password" minlength="8" required>
-            <span class="auth-hint">At least 8 characters.</span>
-          </label>
-          <label>Confirm password
-            <input type="password" id="confirmPassword" autocomplete="new-password" minlength="8" required>
-          </label>
-          <button type="submit" class="btn btn-primary">Create account</button>
-        </form>
+        <!-- Main Content -->
+        <main>
+          <h1>Sign up</h1>
+          <p>Create an account to save your own solutions.</p>
 
-        <p id="message" class="auth-message" role="status"></p>
-        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
-      </div>
-    </main>
+          <div class="auth-card">
+            <form id="authForm">
+              <label>Username
+                <input type="text" id="username" autocomplete="username"
+                      pattern="[A-Za-z0-9_]{3,30}" required>
+                <span class="auth-hint">3 to 30 characters: letters, numbers, underscore. This name is public.</span>
+              </label>
+              <label>Email
+                <input type="email" id="email" autocomplete="email" required>
+              </label>
+              <label>Password
+                <input type="password" id="password" autocomplete="new-password" minlength="8" required>
+                <span class="auth-hint">At least 8 characters.</span>
+              </label>
+              <label>Confirm password
+                <input type="password" id="confirmPassword" autocomplete="new-password" minlength="8" required>
+              </label>
+              <button type="submit" class="btn btn-primary">Create account</button>
+            </form>
 
-    <footer class="site-footer" id="siteFooter"></footer>
+            <p id="message" class="auth-message" role="status"></p>
+            <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+          </div>
+        </main>
 
-  </div>
+        <!-- Footer -->
+        <footer class="site-footer" id="siteFooter"></footer>
+
+    </div>
+
 </body>
 </html>

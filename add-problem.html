@@ -1,121 +1,126 @@
 
 <!DOCTYPE html>
-<!-- =====================================================
-     PAGE: Add Problem
-     PURPOSE: Provide the form for adding a new problem.
-     ===================================================== -->
 <html lang="en">
 <head>
-    <!--
-    BASE PATH
-    GitHub Pages project sites are served from /MathWorld/.
-    Local development and custom domains are served from /.
-    Keep this bootstrap before all local CSS and JavaScript references.
-  -->
-  <script>
-    (function () {
-      const isGitHubPages = window.location.hostname.endsWith("github.io");
-      const basePath = isGitHubPages ? "/MathWorld/" : "/";
-      const baseElement = document.createElement("base");
-      baseElement.href = basePath;
-      document.head.appendChild(baseElement);
+    <!-- Basic Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page description">
 
-      window.mwUrl = function (path) {
-        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
-      };
-    })();
-  </script>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Add Problem - MathWorld</title>
+    <!-- Page Title -->
+    <title>Page Title - MathWorld</title>
 
-  <script>
-    (function () {
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
-    })();
-  </script>
+    <!-- Theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme =
+                saved || (prefersDark ? "dark" : "light");
+        })();
+    </script>
 
-  <link rel="stylesheet" href="style.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="supabase-client.js"></script>
-  <script defer src="layout.js"></script>
-  <script defer src="auth-ui.js"></script>
-  <script defer src="script.js"></script>
-  <script defer src="add-problem.js"></script>
+    <!-- Supabase -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- BBCode -->
+    <script defer src="bbcode.js"></script>
+
+    <!-- Core JavaScript -->
+    <script defer src="supabase-client.js"></script>
+    <script defer src="layout.js"></script>
+    <script defer src="auth-ui.js"></script>
+    <script defer src="script.js"></script>
+
+    <!-- Page JavaScript -->
+    <script defer src="add-problem.js"></script>
 </head>
-
 <body>
-  <div class="layout">
-    <nav class="sidebar" id="sidebar"></nav>
 
-    <main>
-      <h1>Add a Problem</h1>
-      <p>Add a new problem directly to the MathWorld problem collection.</p>
+    <div class="layout">
 
-      <form id="problemForm">
-        <label class="filter-field">
-          Title
-          <input type="text" id="title" required>
-        </label>
+        <!-- Navigation -->
+        <nav class="sidebar" id="sidebar"></nav>
 
-        <label class="filter-field">
-          Statement
-          <textarea id="statement" rows="8" required></textarea>
-        </label>
+        <!-- Main Content -->
+        <main>
+          <h1>Add a Problem</h1>
+          <p>Add a new problem directly to the MathWorld problem collection.</p>
 
-        <label class="filter-field">
-          Topic
-          <select id="topic" required>
-            <option value="">Select a topic</option>
-            <option value="Algebra">Algebra</option>
-            <option value="Combinatorics">Combinatorics</option>
-            <option value="Geometry">Geometry</option>
-            <option value="Number Theory">Number Theory</option>
-          </select>
-        </label>
+          <form id="problemForm">
+            <label class="filter-field">
+              Title
+              <input type="text" id="title" required>
+            </label>
 
-        <label class="filter-field">
-          Difficulty
-          <input type="number" id="difficulty" min="1" max="14">
-        </label>
+            <label class="filter-field">
+              Statement
+              <textarea id="statement" rows="8" required></textarea>
+            </label>
 
-        <label class="filter-field">
-          Source
-          <input type="text" id="source">
-        </label>
+            <label class="filter-field">
+              Topic
+              <select id="topic" required>
+                <option value="">Select a topic</option>
+                <option value="Algebra">Algebra</option>
+                <option value="Combinatorics">Combinatorics</option>
+                <option value="Geometry">Geometry</option>
+                <option value="Number Theory">Number Theory</option>
+              </select>
+            </label>
 
-        <label class="filter-field">
-          Proposer
-          <input type="text" id="proposer">
-        </label>
+            <label class="filter-field">
+              Difficulty
+              <input type="number" id="difficulty" min="1" max="14">
+            </label>
 
-        <label class="filter-field">
-          Tags
-          <input type="text" id="tags" placeholder="e.g. Inequality, IMO">
-        </label>
+            <label class="filter-field">
+              Source
+              <input type="text" id="source">
+            </label>
 
-        <label class="filter-field">
-          Proposer note
-          <textarea id="proposerNote" rows="3"></textarea>
-        </label>
+            <label class="filter-field">
+              Proposer
+              <input type="text" id="proposer">
+            </label>
 
-        <label class="filter-field">
-          See also
-          <input type="text" id="seeAlso" placeholder="e.g. 12, 25, 38">
-        </label>
+            <label class="filter-field">
+              Tags
+              <input type="text" id="tags" placeholder="e.g. Inequality, IMO">
+            </label>
 
-        <button type="submit" class="btn" id="submitProblem">
-          Add Problem
-        </button>
+            <label class="filter-field">
+              Proposer note
+              <textarea id="proposerNote" rows="3"></textarea>
+            </label>
 
-        <p id="problemMessage"></p>
-      </form>
-    </main>
+            <label class="filter-field">
+              See also
+              <input type="text" id="seeAlso" placeholder="e.g. 12, 25, 38">
+            </label>
 
-    <footer class="site-footer" id="siteFooter"></footer>
-  </div>
+            <button type="submit" class="btn" id="submitProblem">
+              Add Problem
+            </button>
+
+            <p id="problemMessage"></p>
+          </form>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer" id="siteFooter"></footer>
+
+    </div>
+
 </body>
 </html>

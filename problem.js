@@ -505,7 +505,7 @@ function makeSolution(row, isMine) {
   } else if (username) {
     const authorLink = document.createElement("a");
     authorLink.href =
-      mwUrl("profile.html") + "?username=" + encodeURIComponent(username);
+      "profile.html" + "?username=" + encodeURIComponent(username);
     authorLink.textContent = username;
     author.append(authorLink);
   } else {

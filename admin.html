@@ -1,79 +1,79 @@
+
 <!DOCTYPE html>
-<!-- =====================================================
-     PAGE: Admin
-     PURPOSE: Provide the administration dashboard and management links.
-     ===================================================== -->
 <html lang="en">
 <head>
-    <!--
-    BASE PATH
-    GitHub Pages project sites are served from /MathWorld/.
-    Local development and custom domains are served from /.
-    Keep this bootstrap before all local CSS and JavaScript references.
-  -->
-  <script>
-    (function () {
-      const isGitHubPages = window.location.hostname.endsWith("github.io");
-      const basePath = isGitHubPages ? "/MathWorld/" : "/";
-      const baseElement = document.createElement("base");
-      baseElement.href = basePath;
-      document.head.appendChild(baseElement);
+    <!-- Basic Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page description">
 
-      window.mwUrl = function (path) {
-        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
-      };
-    })();
-  </script>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin Panel - MathWorld</title>
+    <!-- Page Title -->
+    <title>Page Title - MathWorld</title>
 
-  <script>
-    (function () {
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
+    <!-- Theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme =
+                saved || (prefersDark ? "dark" : "light");
+        })();
+    </script>
 
-      document.documentElement.dataset.theme =
-        saved || (prefersDark ? "dark" : "light");
-    })();
-  </script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css">
+    <!-- Supabase -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="supabase-client.js"></script>
-  <script defer src="layout.js"></script>
-  <script defer src="auth-ui.js"></script>
-  <script defer src="script.js"></script>
-  <script defer src="admin.js"></script>
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- BBCode -->
+    <script defer src="bbcode.js"></script>
+
+    <!-- Core JavaScript -->
+    <script defer src="supabase-client.js"></script>
+    <script defer src="layout.js"></script>
+    <script defer src="auth-ui.js"></script>
+    <script defer src="script.js"></script>
+
+    <!-- Page JavaScript -->
+    <script defer src="admin.js"></script>
 </head>
-
 <body>
-  <div class="layout">
 
-    <nav class="sidebar" id="sidebar"></nav>
+    <div class="layout">
 
-    <main>
-      <h1>Admin Panel</h1>
-      <p>Manage MathWorld from one place.</p>
+        <!-- Navigation -->
+        <nav class="sidebar" id="sidebar"></nav>
 
-      <div class="admin-dashboard">
-        <a href="users.html" class="admin-card">
-          <h2>Users</h2>
-          <p>View users and manage their roles.</p>
-        </a>
+        <!-- Main Content -->
+        <main>
+          <h1>Admin Panel</h1>
+          <p>Manage MathWorld from one place.</p>
 
-        <a href="suggestions.html" class="admin-card">
-          <h2>Problem Suggestions</h2>
-          <p>Review, approve, or reject submitted problems.</p>
-        </a>
-      </div>
-    </main>
+          <div class="admin-dashboard">
+            <a href="users.html" class="admin-card">
+              <h2>Users</h2>
+              <p>View users and manage their roles.</p>
+            </a>
 
-    <footer class="site-footer" id="siteFooter"></footer>
+            <a href="suggestions.html" class="admin-card">
+              <h2>Problem Suggestions</h2>
+              <p>Review, approve, or reject submitted problems.</p>
+            </a>
+          </div>
+        </main>
 
-  </div>
+        <!-- Footer -->
+        <footer class="site-footer" id="siteFooter"></footer>
+
+    </div>
+
 </body>
 </html>

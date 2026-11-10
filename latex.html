@@ -1,68 +1,59 @@
+
 <!DOCTYPE html>
-<!-- =====================================================
-     PAGE: Latex
-     PURPOSE: Explain how to write mathematical notation with LaTeX.
-     ===================================================== -->
 <html lang="en">
 <head>
-    <!--
-    BASE PATH
-    GitHub Pages project sites are served from /MathWorld/.
-    Local development and custom domains are served from /.
-    Keep this bootstrap before all local CSS and JavaScript references.
-  -->
-  <script>
-    (function () {
-      const isGitHubPages = window.location.hostname.endsWith("github.io");
-      const basePath = isGitHubPages ? "/MathWorld/" : "/";
-      const baseElement = document.createElement("base");
-      baseElement.href = basePath;
-      document.head.appendChild(baseElement);
+    <!-- Basic Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page description">
 
-      window.mwUrl = function (path) {
-        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
-      };
-    })();
-  </script>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LaTeX Guide - MathWorld</title>
+    <!-- Page Title -->
+    <title>Page Title - MathWorld</title>
 
-  <script>
-    (function () {
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.dataset.theme =
-        saved || (prefersDark ? "dark" : "light");
-    })();
-  </script>
+    <!-- Theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme =
+                saved || (prefersDark ? "dark" : "light");
+        })();
+    </script>
 
-  <link rel="stylesheet" href="style.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 
-  <!-- KaTeX -->
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <!-- Supabase -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
 
-  <script defer
-    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 
-  <script defer
-    src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="supabase-client.js"></script>
-  <script defer src="layout.js"></script>
-  <script defer src="auth-ui.js"></script>
-  <script defer src="script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 
-  <script defer src="latex-guide.js"></script>
+    <!-- BBCode -->
+    <script defer src="bbcode.js"></script>
+
+    <!-- Core JavaScript -->
+    <script defer src="supabase-client.js"></script>
+    <script defer src="layout.js"></script>
+    <script defer src="auth-ui.js"></script>
+    <script defer src="script.js"></script>
+
+    <!-- Page JavaScript -->
+    <script defer src="latex-guide.js"></script>
 </head>
-
 <body>
-  <div class="layout">
-    <nav class="sidebar" id="sidebar"></nav>
 
-    <main>
+    <div class="layout">
+
+        <!-- Navigation -->
+        <nav class="sidebar" id="sidebar"></nav>
+
+        <!-- Main Content -->
+        <main>
       <h1>LaTeX Guide</h1>
 
       <p>
@@ -278,9 +269,12 @@
             \]
         </div>
         </div>
-    </main>
+        </main>
 
-    <footer class="site-footer" id="siteFooter"></footer>
-  </div>
+        <!-- Footer -->
+        <footer class="site-footer" id="siteFooter"></footer>
+
+    </div>
+
 </body>
 </html>

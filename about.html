@@ -1,141 +1,147 @@
+
 <!DOCTYPE html>
-<!-- =====================================================
-     PAGE: About
-     PURPOSE: Explain the MathWorld community and its purpose.
-     ===================================================== -->
 <html lang="en">
 <head>
-    <!--
-    BASE PATH
-    GitHub Pages project sites are served from /MathWorld/.
-    Local development and custom domains are served from /.
-    Keep this bootstrap before all local CSS and JavaScript references.
-  -->
-  <script>
-    (function () {
-      const isGitHubPages = window.location.hostname.endsWith("github.io");
-      const basePath = isGitHubPages ? "/MathWorld/" : "/";
-      const baseElement = document.createElement("base");
-      baseElement.href = basePath;
-      document.head.appendChild(baseElement);
+    <!-- Basic Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page description">
 
-      window.mwUrl = function (path) {
-        return new URL(String(path).replace(/^\/+/, ""), baseElement.href).href;
-      };
-    })();
-  </script>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About - MathWorld</title>
+    <!-- Page Title -->
+    <title>Page Title - MathWorld</title>
 
-  <script>
-    (function () {
-      const saved = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      document.documentElement.dataset.theme = saved || (prefersDark ? "dark" : "light");
-    })();
-  </script>
+    <!-- Theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme =
+                saved || (prefersDark ? "dark" : "light");
+        })();
+    </script>
 
-  <link rel="stylesheet" href="style.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
-  <script defer src="supabase-client.js"></script>
-  <script defer src="layout.js"></script>
-  <script defer src="auth-ui.js"></script>
-  <script defer src="script.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- BBCode -->
+    <script defer src="bbcode.js"></script>
+
+    <!-- Core JavaScript -->
+    <script defer src="supabase-client.js"></script>
+    <script defer src="layout.js"></script>
+    <script defer src="auth-ui.js"></script>
+    <script defer src="script.js"></script>
+
+    <!-- Page JavaScript -->
 </head>
 <body>
-  <div class="layout">
 
-    <nav class="sidebar" id="sidebar"></nav>
+    <div class="layout">
 
-    <main>
-      <h1>About MathWorld</h1>
-      <p>
-        MathWorld is a platform dedicated to discovering, sharing, and exploring
-        interesting mathematical problems and competitions. Whether you are a
-        beginner or an experienced problem solver, MathWorld aims to help you
-        find new mathematical challenges and opportunities.
-      </p>
+        <!-- Navigation -->
+        <nav class="sidebar" id="sidebar"></nav>
 
-      <h2>Our Purpose</h2>
-      <p>
-        Many interesting mathematical problems and competitions are difficult to
-        discover because they are scattered across different websites and
-        communities. MathWorld aims to bring these resources together in one
-        organized place, making them easier to find and explore.
-      </p>
-
-      <h2>What We Offer</h2>
-      <ul>
-        <li>
-          <strong>Mathematical Problems:</strong>
-          A collection of interesting problems from various sources, covering
-          Algebra, Combinatorics, Geometry, and Number Theory.
-        </li>
-        <li>
-          <strong>Contests:</strong>
-          Opportunities to participate in mathematical competitions and challenge
-          your problem-solving skills.
-        </li>
-        <li>
-          <strong>Solutions:</strong>
-          A place to share mathematical solutions and learn from different
-          approaches.
-        </li>
-      </ul>
-
-      <h2>Our Vision</h2>
-      <p>
-        We hope to build a growing mathematical platform where problem solvers
-        can discover new challenges, share their ideas, participate in contests,
-        and explore the beauty of mathematics together.
-      </p>
-
-      <h2>Mathematical Typesetting</h2>
-      <p>
-        MathWorld supports <strong>LaTeX</strong>, allowing users to write
-        mathematical expressions, equations, and formulas in a clear and
-        professional format. This makes even complex mathematical notation
-        easier to read and understand.
-      </p>
-
-      <h2>BBCode Support</h2>
-      <p>
-        MathWorld also supports <strong>BBCode</strong>, a simple markup system
-        that helps users format their solutions and posts. Users can organize
-        their writing with features such as bold text, italics, lists, and
-        other formatting options.
-      </p>
-
-      <h2>Guides</h2>
-      <p>
-        Learn how to format your mathematical solutions and write
-        mathematical expressions on MathWorld.
-      </p>
-
-      <div class="guides-grid">
-        <a href="bbcode.html" class="card guide-card">
-          <h3>BBCode Guide</h3>
+        <!-- Main Content -->
+        <main>
+          <h1>About MathWorld</h1>
           <p>
-            Learn how to format text, create lists, insert links,
-            and organize your solutions using BBCode.
+            MathWorld is a platform dedicated to discovering, sharing, and exploring
+            interesting mathematical problems and competitions. Whether you are a
+            beginner or an experienced problem solver, MathWorld aims to help you
+            find new mathematical challenges and opportunities.
           </p>
-          <span>Explore BBCode</span>
-        </a>
 
-        <a href="latex.html" class="card guide-card">
-          <h3>LaTeX Guide</h3>
+          <h2>Our Purpose</h2>
           <p>
-            Learn how to write mathematical expressions, equations,
-            symbols, and formulas using LaTeX.
+            Many interesting mathematical problems and competitions are difficult to
+            discover because they are scattered across different websites and
+            communities. MathWorld aims to bring these resources together in one
+            organized place, making them easier to find and explore.
           </p>
-          <span>Explore LaTeX</span>
-        </a>
-      </div>
-    </main>
 
-    <footer class="site-footer" id="siteFooter"></footer>
+          <h2>What We Offer</h2>
+          <ul>
+            <li>
+              <strong>Mathematical Problems:</strong>
+              A collection of interesting problems from various sources, covering
+              Algebra, Combinatorics, Geometry, and Number Theory.
+            </li>
+            <li>
+              <strong>Contests:</strong>
+              Opportunities to participate in mathematical competitions and challenge
+              your problem-solving skills.
+            </li>
+            <li>
+              <strong>Solutions:</strong>
+              A place to share mathematical solutions and learn from different
+              approaches.
+            </li>
+          </ul>
 
-  </div>
+          <h2>Our Vision</h2>
+          <p>
+            We hope to build a growing mathematical platform where problem solvers
+            can discover new challenges, share their ideas, participate in contests,
+            and explore the beauty of mathematics together.
+          </p>
+
+          <h2>Mathematical Typesetting</h2>
+          <p>
+            MathWorld supports <strong>LaTeX</strong>, allowing users to write
+            mathematical expressions, equations, and formulas in a clear and
+            professional format. This makes even complex mathematical notation
+            easier to read and understand.
+          </p>
+
+          <h2>BBCode Support</h2>
+          <p>
+            MathWorld also supports <strong>BBCode</strong>, a simple markup system
+            that helps users format their solutions and posts. Users can organize
+            their writing with features such as bold text, italics, lists, and
+            other formatting options.
+          </p>
+
+          <h2>Guides</h2>
+          <p>
+            Learn how to format your mathematical solutions and write
+            mathematical expressions on MathWorld.
+          </p>
+
+          <div class="guides-grid">
+            <a href="bbcode.html" class="card guide-card">
+              <h3>BBCode Guide</h3>
+              <p>
+                Learn how to format text, create lists, insert links,
+                and organize your solutions using BBCode.
+              </p>
+              <span>Explore BBCode</span>
+            </a>
+
+            <a href="latex.html" class="card guide-card">
+              <h3>LaTeX Guide</h3>
+              <p>
+                Learn how to write mathematical expressions, equations,
+                symbols, and formulas using LaTeX.
+              </p>
+              <span>Explore LaTeX</span>
+            </a>
+          </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer" id="siteFooter"></footer>
+
+    </div>
+
 </body>
 </html>
