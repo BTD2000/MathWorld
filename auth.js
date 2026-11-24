@@ -98,14 +98,56 @@ async function handleSignup(email, password) {
   showMessage("Account created. Check your email and click the confirmation link, then log in.", false);
 }
 
-async function handleLogin(email, password) {
-  const { error } = await db.auth.signInWithPassword({ email, password });
-  if (error) {
-    showMessage(error.message.toLowerCase().includes("email not confirmed")
-      ? "Please confirm your email first. Check your inbox for the confirmation link."
-      : error.message, true);
+
+async function handleLogin(identifier, password) {
+  // If the user entered an email, use normal login.
+  if (identifier.includes("@")) {
+    const { error } = await db.auth.signInWithPassword({
+      email: identifier,
+      password
+    });
+
+    if (error) {
+      showMessage(
+        error.message.toLowerCase().includes("email not confirmed")
+          ? "Please confirm your email first. Check your inbox."
+          : error.message,
+        true
+      );
+      return;
+    }
+
+    window.location.href = "index.html";
     return;
   }
+
+  // Otherwise, use the username-to-email Edge Function.
+  const { data, error } = await db.functions.invoke(
+    "username-to-email",
+    {
+      body: {
+        username: identifier,
+        password
+      }
+    }
+  );
+
+  if (error || !data?.session) {
+    showMessage("Invalid username or password.", true);
+    return;
+  }
+
+  // Save the returned session in the browser's Supabase client.
+  const { error: sessionError } = await db.auth.setSession({
+    access_token: data.session.access_token,
+    refresh_token: data.session.refresh_token
+  });
+
+  if (sessionError) {
+    showMessage("Could not complete login. Please try again.", true);
+    return;
+  }
+
   window.location.href = "index.html";
 }
 
