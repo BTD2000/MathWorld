@@ -5,7 +5,7 @@
 
 // The sidebar and footer live here, so they are edited in one place.
 const NAV_HTML = `
-  <h2>Contents</h2>
+  <a href="index.html" style="text-decoration: none;"><h2><img src="MathWorldLogo v1.1.png" alt="MathWorld Logo" width="80" height="80" style="vertical-align: middle;"> MathWorld</h2></a>
   <ul>
     <li><a href="${"index.html"}">Home</a></li>
     <li><a href="${"problems.html"}">Problems</a></li>
