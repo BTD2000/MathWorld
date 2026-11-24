@@ -4,7 +4,7 @@
    ===================================================== */
 
 const params = new URLSearchParams(location.search);
-const problemId = Number(params.get("id"));
+const problemId = Number(params.get("problem"));
 
 const statusLine = document.getElementById("statusLine");
 const problemBox = document.getElementById("problemBox");
@@ -526,7 +526,12 @@ function makeSolution(row, isMine) {
   text.className = "solution-text";
   renderBBCode(text, row.content);
 
-  card.append(header, meta, text);
+  // Link to individual solution page
+  const viewLink = document.createElement("a");
+  viewLink.href = `solution.html?solution=${row.id}`;
+  viewLink.textContent = "View full solution";
+
+  card.append(header, meta, text, viewLink);
 
   if (isMine) {
     const actions = document.createElement("div");

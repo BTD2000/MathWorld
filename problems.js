@@ -110,7 +110,7 @@ function makeRow(problem) {
 
   const titleCell = document.createElement("td");
   const link = document.createElement("a");
-  link.href = "problem.html" + "?id=" + problem.id;
+  link.href = "problem.html" + "?problem=" + problem.id;
   link.textContent = problem.title;
   titleCell.append(link);
   if (solvedIds.has(problem.id)) {

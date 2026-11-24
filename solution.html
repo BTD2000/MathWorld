@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="MathWorldLogo v1.1.png">
+
+    <!-- Page Title -->
+    <title>Solution - MathWorld</title>
+
+    <!-- Theme -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme =
+                saved || (prefersDark ? "dark" : "light");
+        })();
+    </script>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Supabase -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- BBCode -->
+    <script defer src="bbcode.js"></script>
+
+    <!-- Core JavaScript -->
+    <script defer src="supabase-client.js"></script>
+    <script defer src="layout.js"></script>
+    <script defer src="auth-ui.js"></script>
+    <script defer src="script.js"></script>
+
+    <!-- Page JavaScript -->
+    <script defer src="solution.js"></script>
+</head>
+<body>
+
+    <div class="layout">
+
+        <!-- Navigation -->
+        <nav class="sidebar" id="sidebar"></nav>
+
+        <!-- Main Content -->
+        <main class="wide">
+            <p><a id="backToProblem">&larr; Back to problem</a></p>
+
+            <p id="solutionStatus"></p>
+
+            <div class="problem-layout">
+
+                <div class="problem-main">
+
+                    <!-- Problem statement -->
+                    <div id="problemBox"></div>
+
+                    <!-- Single solution -->
+                    <h2>Solution</h2>
+                    <div id="solutionContent"></div>
+
+                </div>
+
+                <!-- Information panel -->
+                <aside class="info-panel" id="infoPanel" hidden>
+
+                    <h2>Problem Info</h2>
+
+                    <table class="info-table">
+                        <tbody id="problemInfoRows"></tbody>
+                    </table>
+
+                    <h2>Solution Info</h2>
+
+                    <table class="info-table">
+                        <tbody id="solutionInfoRows"></tbody>
+                    </table>
+
+                </aside>
+
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer" id="siteFooter"></footer>
+
+    </div>
+
+</body>
+</html>

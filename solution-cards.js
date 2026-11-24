@@ -49,7 +49,7 @@ function makeSolutionCard(row, options = {}) {
   const title = document.createElement("h3");
   const problemLink = document.createElement("a");
 
-  problemLink.href = "problem.html" + "?id=" + encodeURIComponent(row.problem_id);
+  problemLink.href = "problem.html" + "?problem=" + encodeURIComponent(row.problem_id);
   problemLink.textContent = row.problems?.title ||
     "Problem " + row.problem_id;
 
